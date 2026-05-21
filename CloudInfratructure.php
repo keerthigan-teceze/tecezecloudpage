@@ -1,0 +1,4292 @@
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, sans-serif; background: #000; color: #fff; }
+
+  .ci-hero {
+    position: relative;
+    width: 100%;
+    background: linear-gradient(135deg, #040e32 0%, #0a2060 40%, #0d3a6e 70%, #0a4a5e 100%);
+   background-image: url('/images/CloudInfratructure-hero.png'); /* ← ADD BG IMAGE HERE */
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  .ci-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 101px 48px 48px;
+    width: 100%;
+  }
+
+  /* Breadcrumb row */
+  .ci-top-row {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .ci-hero-breadcrumb {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+  }
+
+  /* Full-width divider */
+  .ci-full-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.25);
+    margin-bottom: 28px;
+  }
+
+  /* Two-column body */
+  .ci-body-row {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* LEFT */
+  .ci-hero-left { display: flex; flex-direction: column; }
+
+  .ci-hero-title {
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.18;
+    color: #fff;
+    margin-bottom: 16px;
+    max-width: 520px;
+  }
+
+  .ci-hero-sub {
+    font-size: 13px;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.68);
+    max-width: 400px;
+    margin-bottom: 28px;
+  }
+
+  .ci-hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 18px 7px 7px;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    border-radius: 50px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  .ci-hero-btn-icon {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #13C5B8, #2A44B0);
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* FORM */
+  .ci-form-wrap {
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 14px;
+    padding: 20px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+
+  .ci-form-title { font-size: 17px; font-weight: 600; color: #fff; }
+
+  .ci-field { display: flex; flex-direction: column; gap: 5px; }
+
+  .ci-field label {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.02em;
+  }
+
+  .ci-field input,
+  .ci-field textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 7px;
+    padding: 8px 11px;
+    font-size: 12.5px;
+    font-family: inherit;
+    color: #fff;
+    outline: none;
+  }
+
+  .ci-field input::placeholder,
+  .ci-field textarea::placeholder { color: rgba(200,220,255,0.35); }
+
+  .ci-field input:focus,
+  .ci-field textarea:focus {
+    border-color: rgba(100,180,255,0.5);
+    background: rgba(255,255,255,0.12);
+  }
+
+  .ci-field textarea { resize: none; height: 68px; line-height: 1.5; }
+
+  /* PHONE ROW */
+  .ci-phone-row { display: flex; gap: 7px; position: relative; }
+
+  .ci-flag-btn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 9px;
+    height: 34px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 7px;
+    color: #fff;
+    font-size: 12.5px;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .ci-flag-btn .flag-emoji { font-size: 15px; line-height: 1; }
+  .ci-flag-btn .dial-code { font-size: 12px; font-weight: 500; }
+
+  .ci-flag-btn .chev {
+    width: 0; height: 0;
+    border-left: 3.5px solid transparent;
+    border-right: 3.5px solid transparent;
+    border-top: 4.5px solid rgba(255,255,255,0.55);
+    margin-left: 2px;
+    margin-top: 1px;
+  }
+
+  .ci-phone-input {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 7px;
+    padding: 8px 11px;
+    font-size: 12.5px;
+    font-family: inherit;
+    color: #fff;
+    outline: none;
+  }
+
+  .ci-phone-input::placeholder { color: rgba(200,220,255,0.35); }
+  .ci-phone-input:focus { border-color: rgba(100,180,255,0.5); background: rgba(255,255,255,0.12); }
+
+  /* DROPDOWN */
+  .ci-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    width: 240px;
+    max-height: 210px;
+    overflow-y: auto;
+    background: #0d1f50;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 9px;
+    z-index: 200;
+    padding: 4px 0;
+  }
+
+  .ci-dropdown.open { display: block; }
+
+  .ci-dropdown-search {
+    width: calc(100% - 14px);
+    margin: 6px 7px;
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: inherit;
+    color: #fff;
+    outline: none;
+  }
+
+  .ci-dropdown-search::placeholder { color: rgba(255,255,255,0.35); }
+
+  .ci-dropdown-list { list-style: none; }
+
+  .ci-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.85);
+    cursor: pointer;
+  }
+
+  .ci-dropdown-item:hover { background: rgba(255,255,255,0.10); }
+  .ci-dropdown-item.selected { background: rgba(100,180,255,0.15); }
+
+  .ci-dropdown-item .di-flag { font-size: 15px; line-height: 1; }
+  .ci-dropdown-item .di-name { flex: 1; font-size: 12px; color: rgba(255,255,255,0.65); }
+  .ci-dropdown-item .di-code { font-size: 12px; font-weight: 500; }
+
+  .ci-dropdown::-webkit-scrollbar { width: 4px; }
+  .ci-dropdown::-webkit-scrollbar-track { background: transparent; }
+  .ci-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+
+  /* SUBMIT */
+  .ci-form-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 18px 7px 7px;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    width: fit-content;
+    margin-top: 2px;
+  }
+
+  .ci-form-btn-icon {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #13C5B8, #2A44B0);
+    display: flex; align-items: center; justify-content: center;
+  }
+</style>
+
+<section class="ci-hero">
+  <div class="ci-hero-content">
+
+    <!-- Breadcrumb row (above divider) -->
+    <div class="ci-top-row">
+      <p class="ci-hero-breadcrumb">WHAT WE DO / CLOUD INFRASTRUCTURE</p>
+      <div></div>
+    </div>
+
+    <!-- Full-width divider -->
+    <div class="ci-full-divider"></div>
+
+    <!-- Two-column body (below divider) -->
+    <div class="ci-body-row">
+
+      <!-- LEFT -->
+      <div class="ci-hero-left">
+        <h1 class="ci-hero-title">Scalable Cloud Infrastructure Built for Performance and Control</h1>
+        <p class="ci-hero-sub">Design, migration, and management of cloud environments that deliver flexibility, high availability, and secure access to critical workloads supporting business operations at scale.</p>
+        <a href="https://teal-mule-553916.hostingersite.com/Contactus.php" class="ci-hero-btn">
+          <span class="ci-hero-btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+          Start Your Cloud Journey
+        </a>
+      </div>
+
+      <!-- RIGHT: form -->
+      <div class="ci-form-wrap">
+        <p class="ci-form-title">Enquire Now</p>
+
+        <div class="ci-field">
+          <label>Full Name</label>
+          <input type="text" placeholder="Enter Full Name" autocomplete="off"/>
+        </div>
+
+        <div class="ci-field">
+          <label>Phone number</label>
+          <div class="ci-phone-row" id="phoneRow">
+            <div class="ci-flag-btn" id="flagBtn">
+              <span class="flag-emoji" id="selFlag">🇮🇳</span>
+              <span class="dial-code" id="selCode">+91</span>
+              <span class="chev"></span>
+            </div>
+            <div class="ci-dropdown" id="countryDropdown">
+              <input class="ci-dropdown-search" id="countrySearch" type="text" placeholder="Search country..."/>
+              <ul class="ci-dropdown-list" id="countryList"></ul>
+            </div>
+            <input class="ci-phone-input" type="tel" placeholder="Phone number"/>
+          </div>
+        </div>
+
+        <div class="ci-field">
+          <label>Message</label>
+          <textarea placeholder="Enter your message"></textarea>
+        </div>
+
+        <button class="ci-form-btn" type="button">
+          <span class="ci-form-btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+          Enquire now
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+const countries = [
+  {flag:"🇺🇸",name:"United States",code:"+1"},
+  {flag:"🇬🇧",name:"United Kingdom",code:"+44"},
+  {flag:"🇮🇳",name:"India",code:"+91"},
+  {flag:"🇦🇺",name:"Australia",code:"+61"},
+  {flag:"🇦🇪",name:"UAE",code:"+971"},
+  {flag:"🇸🇬",name:"Singapore",code:"+65"},
+  {flag:"🇩🇪",name:"Germany",code:"+49"},
+  {flag:"🇫🇷",name:"France",code:"+33"},
+  {flag:"🇯🇵",name:"Japan",code:"+81"},
+  {flag:"🇨🇳",name:"China",code:"+86"},
+  {flag:"🇨🇦",name:"Canada",code:"+1"},
+  {flag:"🇧🇷",name:"Brazil",code:"+55"},
+  {flag:"🇲🇽",name:"Mexico",code:"+52"},
+  {flag:"🇮🇹",name:"Italy",code:"+39"},
+  {flag:"🇪🇸",name:"Spain",code:"+34"},
+  {flag:"🇳🇱",name:"Netherlands",code:"+31"},
+  {flag:"🇰🇷",name:"South Korea",code:"+82"},
+  {flag:"🇿🇦",name:"South Africa",code:"+27"},
+  {flag:"🇳🇬",name:"Nigeria",code:"+234"},
+  {flag:"🇸🇦",name:"Saudi Arabia",code:"+966"},
+  {flag:"🇵🇰",name:"Pakistan",code:"+92"},
+  {flag:"🇧🇩",name:"Bangladesh",code:"+880"},
+  {flag:"🇮🇩",name:"Indonesia",code:"+62"},
+  {flag:"🇵🇭",name:"Philippines",code:"+63"},
+  {flag:"🇹🇭",name:"Thailand",code:"+66"},
+  {flag:"🇲🇾",name:"Malaysia",code:"+60"},
+  {flag:"🇻🇳",name:"Vietnam",code:"+84"},
+  {flag:"🇵🇹",name:"Portugal",code:"+351"},
+  {flag:"🇸🇪",name:"Sweden",code:"+46"},
+  {flag:"🇨🇭",name:"Switzerland",code:"+41"},
+  {flag:"🇳🇿",name:"New Zealand",code:"+64"},
+  {flag:"🇦🇷",name:"Argentina",code:"+54"},
+  {flag:"🇨🇴",name:"Colombia",code:"+57"},
+  {flag:"🇪🇬",name:"Egypt",code:"+20"},
+  {flag:"🇰🇪",name:"Kenya",code:"+254"},
+  {flag:"🇬🇭",name:"Ghana",code:"+233"},
+  {flag:"🇹🇷",name:"Turkey",code:"+90"},
+  {flag:"🇺🇦",name:"Ukraine",code:"+380"},
+  {flag:"🇵🇱",name:"Poland",code:"+48"},
+  {flag:"🇷🇺",name:"Russia",code:"+7"},
+];
+
+let selected = countries[2];
+
+const flagBtn = document.getElementById("flagBtn");
+const dropdown = document.getElementById("countryDropdown");
+const list = document.getElementById("countryList");
+const search = document.getElementById("countrySearch");
+const selFlag = document.getElementById("selFlag");
+const selCode = document.getElementById("selCode");
+
+function renderList(arr) {
+  list.innerHTML = arr.map(c => `
+    <li class="ci-dropdown-item ${c===selected?'selected':''}" data-code="${c.code}" data-flag="${c.flag}" data-name="${c.name}">
+      <span class="di-flag">${c.flag}</span>
+      <span class="di-name">${c.name}</span>
+      <span class="di-code">${c.code}</span>
+    </li>`).join("");
+
+  list.querySelectorAll(".ci-dropdown-item").forEach(el => {
+    el.addEventListener("click", () => {
+      selected = countries.find(c => c.name === el.dataset.name);
+      selFlag.textContent = selected.flag;
+      selCode.textContent = selected.code;
+      dropdown.classList.remove("open");
+      search.value = "";
+      renderList(countries);
+    });
+  });
+}
+
+renderList(countries);
+
+flagBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  dropdown.classList.toggle("open");
+  if (dropdown.classList.contains("open")) setTimeout(() => search.focus(), 40);
+});
+
+search.addEventListener("input", () => {
+  const q = search.value.toLowerCase();
+  renderList(countries.filter(c => c.name.toLowerCase().includes(q) || c.code.includes(q)));
+});
+
+document.addEventListener("click", e => {
+  if (!document.getElementById("phoneRow").contains(e.target))
+    dropdown.classList.remove("open");
+});
+</script>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloud Overview</title>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/gilroy-free" />
+  <style>
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Gilroy', 'Segoe UI', Arial, sans-serif;
+      background: #ffffff;
+      color: #0f1f3d;
+    }
+
+    /* ================================================
+       SECTION 2: OVERVIEW
+    ================================================ */
+    .ci-overview {
+      width: 100%;
+      background: #ffffff;
+      padding: 80px 60px;
+    }
+
+    .ci-overview-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    /* ===== LEFT IMAGE ===== 
+    .ci-overview-img-wrap {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+    }
+
+    .ci-overview-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .ci-overview-img-wrap:hover .ci-overview-img {
+      transform: scale(1.03);
+    }*/
+    /* ===== LEFT IMAGE ===== */
+.ci-overview-img-wrap {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 100%;
+  min-height: 100%;
+}
+
+.ci-overview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ci-overview-img-wrap:hover .ci-overview-img {
+  transform: scale(1.03);
+}
+
+/* ===== WRAPPER needs align-items stretch ===== */
+.ci-overview-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 70px;
+  align-items: stretch;
+}
+
+    /* ===== RIGHT CONTENT ===== */
+    .ci-overview-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ci-overview-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #8a94a6;
+      margin-bottom: 12px;
+      letter-spacing: 0.2px;
+    }
+
+    .ci-overview-title {
+      font-size: 38px;
+      font-weight: 700;
+      color: #0f1f3d;
+      line-height: 1.2;
+      margin-bottom: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .ci-overview-desc {
+      font-size: 14px;
+      color: #4a5568;
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    /* ===== FEATURE TAGS ===== */
+    .ci-tags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 60px;
+    }
+
+    .ci-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border: 1px solid #dde1ea;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #0f1f3d;
+      background: #ffffff;
+      font-family: 'Gilroy', 'Segoe UI', Arial, sans-serif;
+      transition: border-color 0.3s ease, background 0.3s ease;
+      cursor: default;
+    }
+
+    .ci-tag:hover {
+      border-color: #2A44B0;
+      background: #f0f3ff;
+    }
+
+    .ci-tag svg {
+      width: 15px;
+      height: 15px;
+      stroke: #2A44B0;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    /* ===== BOTTOM STATEMENT ===== */
+    .ci-overview-statement {
+      padding-top: 32px;
+      border-top: 1px solid #edf0f5;
+    }
+
+    .ci-statement-text {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.45;
+      color: #0f1f3d;
+    }
+
+    .ci-statement-grey {
+      color: #8a94a6;
+      font-weight: 400;
+    }
+
+    /* ================================================
+       TABLET (max-width: 1024px)
+    ================================================ */
+    @media (max-width: 1024px) {
+      .ci-overview {
+        padding: 60px 40px;
+      }
+
+      .ci-overview-wrapper {
+        gap: 40px;
+      }
+
+      .ci-overview-title {
+        font-size: 32px;
+      }
+
+      .ci-statement-text {
+        font-size: 22px;
+      }
+    }
+
+    /* ================================================
+       MOBILE (max-width: 768px)
+    ================================================ */
+    @media (max-width: 768px) {
+      .ci-overview {
+        padding: 50px 24px;
+      }
+
+      .ci-overview-wrapper {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .ci-overview-img-wrap {
+        aspect-ratio: 16 / 9;
+      }
+
+      .ci-overview-title {
+        font-size: 28px;
+      }
+
+      .ci-overview-desc {
+        font-size: 13px;
+      }
+
+      .ci-tags-grid {
+        gap: 8px;
+        margin-bottom: 40px;
+      }
+
+      .ci-tag {
+        font-size: 12px;
+        padding: 8px 14px;
+      }
+
+      .ci-statement-text {
+        font-size: 19px;
+      }
+    }
+
+    /* ================================================
+       SMALL MOBILE (max-width: 480px)
+    ================================================ */
+    @media (max-width: 480px) {
+      .ci-overview {
+        padding: 40px 16px;
+      }
+
+      .ci-overview-title {
+        font-size: 24px;
+      }
+
+      .ci-overview-desc {
+        font-size: 13px;
+      }
+
+      .ci-tag {
+        font-size: 12px;
+        padding: 7px 12px;
+      }
+
+      .ci-statement-text {
+        font-size: 16px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+<?php include 'header.php'; ?>
+<!-- ===== SECTION 2: OVERVIEW ===== -->
+<section class="ci-overview">
+  <div class="ci-overview-wrapper">
+
+    <!-- Left Image -->
+    <div class="ci-overview-img-wrap">
+      <img
+        src="images/cloudinfra-left.png"
+        alt="Cloud Infrastructure Overview"
+        class="ci-overview-img"
+      />
+    </div>
+
+    <!-- Right Content -->
+    <div class="ci-overview-content">
+
+      <p class="ci-overview-label">Overview</p>
+
+      <h2 class="ci-overview-title">Reimagine What Your<br>Infrastructure Can Do.</h2>
+
+      <p class="ci-overview-desc">Modern businesses compete on infrastructure, not just ideas. Legacy systems slow you down—cloud accelerates growth. Teceze engineers cloud ecosystems that are built for the demands of tomorrow.</p>
+
+      <!-- Feature Tags -->
+      <div class="ci-tags-grid">
+
+        <div class="ci-tag">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 3 21 3 21 9"/>
+            <polyline points="9 21 3 21 3 15"/>
+            <line x1="21" y1="3" x2="14" y2="10"/>
+            <line x1="3" y1="21" x2="10" y2="14"/>
+          </svg>
+          Scale instantly
+        </div>
+
+        <div class="ci-tag">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+          </svg>
+          Reduce complexity
+        </div>
+
+        <div class="ci-tag">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          Always-on performance
+        </div>
+
+        <div class="ci-tag">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          Strengthen security
+        </div>
+
+        <div class="ci-tag">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+          Accelerate innovation
+        </div>
+
+      </div>
+
+      <!-- Bottom Statement -->
+      <div class="ci-overview-statement">
+        <p class="ci-statement-text">
+          <span>AI-driven threat detection and real time monitoring to prevent attacks</span>
+          <span class="ci-statement-grey">, reduce risks, and keep your business secure.</span>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>What We Offer</title>
+  <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/gilroy-free" />
+  <style>
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Gilroy', 'Segoe UI', Arial, sans-serif;
+      background: #ffffff;
+      color: #0f1f3d;
+    }
+
+    /* ================================================
+       SECTION 3: WHAT WE OFFER
+    ================================================ */
+    .ci-offer {
+      position: relative;
+      width: 100%;
+      background: #ffffff;
+      padding: 60px 60px 70px;
+      overflow: hidden;
+    }
+
+    /* ===== WATERMARK ===== */
+    .ci-offer-watermark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+      line-height: 1;
+    }
+
+    .ci-offer-watermark span {
+      display: block;
+      width: 100%;
+      font-size: 18vw;
+      font-weight: 800;
+      color: rgba(0, 0, 0, 0.06);
+      white-space: nowrap;
+      letter-spacing: -4px;
+      line-height: 0.95;
+      text-align: center;
+    }
+
+    .ci-offer-watermark span:nth-child(2) {
+      margin-top: -10px;
+    }
+
+    /* ===== CARDS GRID ===== */
+    .ci-offer-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1100px;
+      margin: 80px auto 0;
+    }
+
+    /* ===== CARD ===== */
+    .ci-offer-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 320px;
+      cursor: pointer;
+    }
+
+    /* ===== CARD BG IMAGE ===== */
+    .ci-offer-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 0.5s ease;
+      z-index: 0;
+      background-color: #1a2a5e; /* fallback color when no image */
+    }
+
+    .ci-offer-card:hover .ci-offer-card-bg {
+      transform: scale(1.05);
+    }
+
+    /* ===== OVERLAY — always visible, darkens on hover ===== */
+    .ci-offer-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 30, 80, 0.25) 0%,
+        rgba(10, 30, 80, 0.65) 100%
+      );
+      z-index: 1;
+      transition: background 0.4s ease;
+    }
+
+    .ci-offer-card:hover .ci-offer-card-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(10, 180, 200, 0.35) 0%,
+        rgba(10, 30, 90, 0.88) 100%
+      );
+    }
+
+    /* ===== CARD CONTENT ===== */
+    .ci-offer-card-content {
+      position: relative;
+      z-index: 2;
+      padding: 28px 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Top */
+    .ci-offer-card-top {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ci-offer-card-icon {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ci-offer-card-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: #ffffff;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ci-offer-card-category {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .ci-offer-card-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #ffffff;
+    }
+
+    /* Bottom */
+    .ci-offer-card-bottom {
+      margin-top: 60px;
+    }
+
+    .ci-offer-card-desc {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.80);
+    }
+
+    /* ===== PAGINATION ROW ===== */
+    .ci-offer-pagination {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 32px auto 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .ci-offer-page-num {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+
+    .ci-offer-page-current {
+      font-size: 40px;
+      font-weight: 800;
+      color: #2A44B0;
+      line-height: 1;
+    }
+
+    .ci-offer-page-total {
+      font-size: 16px;
+      font-weight: 500;
+      color: #8a94a6;
+    }
+
+    .ci-offer-page-arrows {
+      display: flex;
+      gap: 10px;
+    }
+
+    .ci-offer-arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid #dde1ea;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease;
+    }
+
+    .ci-offer-arrow:hover {
+      background: #2A44B0;
+      border-color: #2A44B0;
+    }
+
+    .ci-offer-arrow:hover svg {
+      stroke: #ffffff;
+    }
+
+    .ci-offer-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: #0f1f3d;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s ease;
+    }
+
+    /* ================================================
+       BG IMAGE EDIT PANEL
+    ================================================ */
+
+    /* Edit toggle button — top-right of each card */
+    .ci-card-edit-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 10;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.4);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .ci-card-edit-btn:hover {
+      background: rgba(255,255,255,0.35);
+      transform: scale(1.1);
+    }
+
+    .ci-card-edit-btn svg {
+      width: 14px;
+      height: 14px;
+      stroke: #ffffff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      pointer-events: none;
+    }
+
+    /* The popover panel */
+    .ci-card-image-panel {
+      position: absolute;
+      top: 46px;
+      right: 10px;
+      z-index: 20;
+      width: 260px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(10,30,80,0.18), 0 1px 4px rgba(0,0,0,0.08);
+      padding: 14px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      animation: panelFadeIn 0.18s ease;
+    }
+
+    .ci-card-image-panel.open {
+      display: flex;
+    }
+
+    @keyframes panelFadeIn {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .ci-panel-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #8a94a6;
+    }
+
+    /* URL input row */
+    .ci-panel-url-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .ci-panel-url-input {
+      flex: 1;
+      border: 1.5px solid #dde1ea;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 12px;
+      color: #0f1f3d;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+
+    .ci-panel-url-input:focus {
+      border-color: #2A44B0;
+    }
+
+    .ci-panel-url-input::placeholder {
+      color: #b0b8cc;
+    }
+
+    .ci-panel-apply-btn {
+      flex-shrink: 0;
+      background: #2A44B0;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+    }
+
+    .ci-panel-apply-btn:hover {
+      background: #1a337a;
+    }
+
+    /* Divider */
+    .ci-panel-divider {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #b0b8cc;
+      font-size: 11px;
+    }
+
+    .ci-panel-divider::before,
+    .ci-panel-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #eaedf3;
+    }
+
+    /* File upload */
+    .ci-panel-upload-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px dashed #c5ccdc;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 12px;
+      color: #5a6480;
+    }
+
+    .ci-panel-upload-label:hover {
+      border-color: #2A44B0;
+      background: #f0f3fc;
+      color: #2A44B0;
+    }
+
+    .ci-panel-upload-label svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .ci-panel-file-input {
+      display: none;
+    }
+
+    /* Preview strip */
+    .ci-panel-preview {
+      width: 100%;
+      height: 60px;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      background-color: #eaedf3;
+      border: 1.5px solid #eaedf3;
+      display: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ci-panel-preview.has-image {
+      display: block;
+    }
+
+    .ci-panel-preview-label {
+      position: absolute;
+      bottom: 5px;
+      left: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      letter-spacing: 0.5px;
+    }
+
+    /* Clear button */
+    .ci-panel-clear-btn {
+      background: none;
+      border: 1.5px solid #f0d0d0;
+      color: #c0392b;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s;
+      display: none;
+    }
+
+    .ci-panel-clear-btn.visible {
+      display: block;
+    }
+
+    .ci-panel-clear-btn:hover {
+      background: #fdf0ef;
+    }
+
+    /* Close panel button */
+    .ci-panel-close {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: none;
+      background: #f0f3fc;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .ci-panel-close:hover { background: #dde1ea; }
+
+    .ci-panel-close svg {
+      width: 10px;
+      height: 10px;
+      stroke: #5a6480;
+      fill: none;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+    }
+
+    /* ================================================
+       TABLET (max-width: 1024px)
+    ================================================ */
+    @media (max-width: 1024px) {
+      .ci-offer {
+        padding: 50px 40px 60px;
+      }
+
+      .ci-offer-grid {
+        gap: 12px;
+        margin-top: 70px;
+      }
+
+      .ci-offer-card {
+        min-height: 280px;
+      }
+
+      .ci-offer-card-title {
+        font-size: 19px;
+      }
+    }
+
+    /* ================================================
+       MOBILE (max-width: 768px)
+    ================================================ */
+    @media (max-width: 768px) {
+      .ci-offer {
+        padding: 40px 24px 50px;
+      }
+
+      .ci-offer-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-top: 60px;
+      }
+
+      .ci-offer-card {
+        min-height: 240px;
+      }
+
+      .ci-offer-card-title {
+        font-size: 20px;
+      }
+
+      .ci-offer-watermark span {
+        font-size: 18vw;
+        letter-spacing: -2px;
+      }
+
+      .ci-offer-page-current {
+        font-size: 32px;
+      }
+
+      .ci-card-image-panel {
+        right: auto;
+        left: 10px;
+        width: calc(100% - 20px);
+      }
+    }
+
+    /* ================================================
+       SMALL MOBILE (max-width: 480px)
+    ================================================ */
+    @media (max-width: 480px) {
+      .ci-offer {
+        padding: 30px 16px 40px;
+      }
+
+      .ci-offer-card {
+        min-height: 220px;
+      }
+
+      .ci-offer-card-title {
+        font-size: 18px;
+      }
+
+      .ci-offer-card-content {
+        padding: 22px 18px;
+      }
+
+      .ci-offer-watermark span {
+        font-size: 18vw;
+        letter-spacing: -1px;
+      }
+
+      .ci-offer-page-current {
+        font-size: 28px;
+      }
+
+      .ci-offer-arrow {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+  </style>
+</head>
+
+
+
+
+
+<body>
+
+
+
+
+
+
+
+<!-- ===== SECTION 3: WHAT WE OFFER ===== -->
+<section class="ci-offer">
+
+  <!-- Watermark -->
+  <div class="ci-offer-watermark">
+    <span>what we offer</span>
+    <span>what we offer</span>
+  </div>
+
+  <!-- Cards Grid -->
+  <div class="ci-offer-grid">
+
+    <!-- Card 1 -->
+    <div class="ci-offer-card" data-card="0">
+      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-1.png');"></div>
+      <div class="ci-offer-card-overlay"></div>
+      <div class="ci-offer-card-content">
+        <div class="ci-offer-card-top">
+          <div class="ci-offer-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+              <line x1="12" y1="12" x2="12" y2="16"/>
+              <line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+          </div>
+          <p class="ci-offer-card-category">Infrastructure</p>
+          <h3 class="ci-offer-card-title">Cloud Strategy &amp;<br>Architecture</h3>
+        </div>
+        <div class="ci-offer-card-bottom">
+          <p class="ci-offer-card-desc">Future-ready cloud strategy and architecture.</p>
+        </div>
+      </div>
+
+      <!-- Edit button -->
+      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </button>
+
+      <!-- Image panel -->
+      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
+        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
+          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+        </button>
+        <p class="ci-panel-title">Background Image</p>
+
+        <!-- URL input -->
+        <div class="ci-panel-url-row">
+          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
+          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        </div>
+
+        <div class="ci-panel-divider">or</div>
+
+        <!-- File upload -->
+        <label class="ci-panel-upload-label">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload from device
+          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
+        </label>
+
+        <!-- Preview -->
+        <div class="ci-panel-preview">
+          <span class="ci-panel-preview-label">Preview</span>
+        </div>
+
+        <!-- Clear -->
+        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="ci-offer-card" data-card="1">
+      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-3.png');"></div>
+      <div class="ci-offer-card-overlay"></div>
+      <div class="ci-offer-card-content">
+        <div class="ci-offer-card-top">
+          <div class="ci-offer-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <p class="ci-offer-card-category">Management</p>
+          <h3 class="ci-offer-card-title">Cloud Migration</h3>
+        </div>
+        <div class="ci-offer-card-bottom">
+          <p class="ci-offer-card-desc">Seamless migration to cloud with zero disruption.</p>
+        </div>
+      </div>
+
+      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </button>
+
+      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
+        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
+          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+        </button>
+        <p class="ci-panel-title">Background Image</p>
+        <div class="ci-panel-url-row">
+          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
+          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        </div>
+        <div class="ci-panel-divider">or</div>
+        <label class="ci-panel-upload-label">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload from device
+          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
+        </label>
+        <div class="ci-panel-preview">
+          <span class="ci-panel-preview-label">Preview</span>
+        </div>
+        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="ci-offer-card" data-card="2">
+      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-2.png');"></div>
+      <div class="ci-offer-card-overlay"></div>
+      <div class="ci-offer-card-content">
+        <div class="ci-offer-card-top">
+          <div class="ci-offer-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <p class="ci-offer-card-category">Integration</p>
+          <h3 class="ci-offer-card-title">Multi-Cloud &amp; Hybrid</h3>
+        </div>
+        <div class="ci-offer-card-bottom">
+          <p class="ci-offer-card-desc">Unified multi-cloud and hybrid environment management.</p>
+        </div>
+      </div>
+
+      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </button>
+
+      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
+        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
+          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+        </button>
+        <p class="ci-panel-title">Background Image</p>
+        <div class="ci-panel-url-row">
+          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
+          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        </div>
+        <div class="ci-panel-divider">or</div>
+        <label class="ci-panel-upload-label">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          Upload from device
+          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
+        </label>
+        <div class="ci-panel-preview">
+          <span class="ci-panel-preview-label">Preview</span>
+        </div>
+        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pagination Row -->
+  <div class="ci-offer-pagination">
+    <div class="ci-offer-page-num">
+      <span class="ci-offer-page-current">01</span>
+      <span class="ci-offer-page-total">/05</span>
+    </div>
+    <div class="ci-offer-page-arrows">
+      <button class="ci-offer-arrow" aria-label="Previous">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+      <button class="ci-offer-arrow" aria-label="Next">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+</section>
+
+<script>
+  /* ===== Close all panels except the one passed ===== */
+  function closeAllPanels(except) {
+    document.querySelectorAll('.ci-card-image-panel.open').forEach(p => {
+      if (p !== except) p.classList.remove('open');
+    });
+  }
+
+  /* ===== Toggle the panel for this card's edit button ===== */
+  function togglePanel(btn, e) {
+    e.stopPropagation();
+    const card = btn.closest('.ci-offer-card');
+    const panel = card.querySelector('.ci-card-image-panel');
+    const isOpen = panel.classList.contains('open');
+    closeAllPanels(null);
+    if (!isOpen) panel.classList.add('open');
+  }
+
+  /* ===== Close panel via X button ===== */
+  function closePanel(btn, e) {
+    e.stopPropagation();
+    btn.closest('.ci-card-image-panel').classList.remove('open');
+  }
+
+  /* ===== Get the bg div and preview for a panel ===== */
+  function getCardBg(panel) {
+    return panel.closest('.ci-offer-card').querySelector('.ci-offer-card-bg');
+  }
+
+  function setPreview(panel, url) {
+    const preview = panel.querySelector('.ci-panel-preview');
+    const clearBtn = panel.querySelector('.ci-panel-clear-btn');
+    if (url) {
+      preview.style.backgroundImage = `url('${url}')`;
+      preview.classList.add('has-image');
+      clearBtn.classList.add('visible');
+    } else {
+      preview.style.backgroundImage = '';
+      preview.classList.remove('has-image');
+      clearBtn.classList.remove('visible');
+    }
+  }
+
+  /* ===== Apply URL ===== */
+  function applyUrl(btn) {
+    const panel = btn.closest('.ci-card-image-panel');
+    const input = panel.querySelector('.ci-panel-url-input');
+    const url = input.value.trim();
+    if (!url) return;
+    const bg = getCardBg(panel);
+    bg.style.backgroundImage = `url('${url}')`;
+    setPreview(panel, url);
+  }
+
+  /* ===== Apply uploaded file ===== */
+  function applyFile(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    const panel = input.closest('.ci-card-image-panel');
+    reader.onload = function(e) {
+      const dataUrl = e.target.result;
+      const bg = getCardBg(panel);
+      bg.style.backgroundImage = `url('${dataUrl}')`;
+      setPreview(panel, dataUrl);
+      // Also fill URL input for reference
+      panel.querySelector('.ci-panel-url-input').value = '';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ===== Clear image ===== */
+  function clearImage(btn) {
+    const panel = btn.closest('.ci-card-image-panel');
+    const bg = getCardBg(panel);
+    bg.style.backgroundImage = '';
+    panel.querySelector('.ci-panel-url-input').value = '';
+    setPreview(panel, null);
+  }
+
+  /* ===== Allow Enter key to apply URL ===== */
+  document.querySelectorAll('.ci-panel-url-input').forEach(input => {
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        this.closest('.ci-panel-url-row').querySelector('.ci-panel-apply-btn').click();
+      }
+    });
+  });
+
+  /* ===== Close all panels on outside click ===== */
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.ci-card-image-panel') && !e.target.closest('.ci-card-edit-btn')) {
+      closeAllPanels(null);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloud Lifecycle — Engineered for Performance</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+  /* ═══════════════════════════════════════
+     RESET
+  ═══════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ═══════════════════════════════════════
+     TOKENS
+  ═══════════════════════════════════════ */
+  :root {
+    --clc-grid           : rgba(255,255,255,0.058);
+    --clc-grid-sz        : 46px;
+
+    --clc-card-bg        : rgba(255,255,255,0.052);
+    --clc-card-border    : rgba(255,255,255,0.11);
+    --clc-card-migrate   : #0c1d38;
+    --clc-card-operate   : #0e2136;
+
+    --clc-line           : rgba(255,255,255,0.20);
+    --clc-dot            : rgba(255,255,255,0.32);
+
+    --clc-white          : #ffffff;
+    --clc-muted          : rgba(255,255,255,0.50);
+    --clc-label          : rgba(255,255,255,0.80);
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION SHELL
+  ═══════════════════════════════════════ */
+  .clc-section {
+    position            : relative;
+    width               : 100%;
+    overflow            : hidden;
+    font-family         : 'Manrope', sans-serif;
+    padding             : 70px 6% 82px;
+    background-image    : url('images/bg-img-cloud-infra.png');
+    background-size     : cover;
+    background-position : center center;
+    background-repeat   : no-repeat;
+  }
+
+  /* ── Overlay: preserves readability over the image ── */
+  .clc-section::before {
+    content       : '';
+    position      : absolute;
+    inset         : 0;
+    pointer-events: none;
+    z-index       : 0;
+    background    : rgba(4, 16, 31, 0.18);
+  }
+
+  .clc-section::after { display: none; }
+
+  /* ═══════════════════════════════════════
+     INNER LAYOUT  (2-col top + full-width bottom)
+  ═══════════════════════════════════════ */
+  .clc-inner {
+    position              : relative;
+    z-index               : 1;
+    max-width             : 1300px;
+    margin                : 0 auto;
+    display               : grid;
+    grid-template-columns : 190px 1fr;
+    grid-template-rows    : auto auto;
+    column-gap            : 56px;
+    row-gap               : 54px;
+    align-items           : start;
+  }
+
+  /* ═══════════════════════════════════════
+     BADGE  (top-left)
+  ═══════════════════════════════════════ */
+  .clc-badge {
+    grid-column : 1;
+    grid-row    : 1;
+  }
+
+  .clc-badge__text {
+    font-size     : 11.5px;
+    font-weight   : 500;
+    line-height   : 1.75;
+    color         : var(--clc-muted);
+    letter-spacing: 0.005em;
+  }
+
+  /* ═══════════════════════════════════════
+     HEADING BLOCK  (top-right)
+  ═══════════════════════════════════════ */
+  .clc-heading {
+    grid-column : 2;
+    grid-row    : 1;
+  }
+
+  .clc-heading__title {
+    font-size     : clamp(1.6rem, 2.5vw, 2.5rem);
+    font-weight   : 800;
+    color         : var(--clc-white);
+    line-height   : 1.18;
+    letter-spacing: -0.025em;
+    margin-bottom : 12px;
+  }
+
+  .clc-heading__sub {
+    font-size  : 14px;
+    font-weight: 400;
+    color      : var(--clc-muted);
+    line-height: 1.55;
+    max-width  : 430px;
+  }
+
+  /* ═══════════════════════════════════════
+     STEPS ROW  (full-width bottom)
+  ═══════════════════════════════════════ */
+  .clc-steps {
+    grid-column     : 1 / -1;
+    grid-row        : 2;
+    display         : flex;
+    align-items     : flex-start;
+    justify-content : space-between;
+    position        : relative;
+  }
+
+  /* ── Individual Step ── */
+  .clc-step {
+    flex           : 1;
+    display        : flex;
+    flex-direction : column;
+    align-items    : center;
+    position       : relative;
+    cursor         : default;
+  }
+
+  /* ── Horizontal connector line ── */
+  .clc-step:not(:last-child)::after {
+    content    : '';
+    position   : absolute;
+    top        : 34px;   /* vertically centred on the 68px icon */
+    left       : calc(50% + 36px);
+    right      : calc(-50% + 36px);
+    height     : 1px;
+    background : var(--clc-line);
+    z-index    : 0;
+  }
+
+  /* ── Joint dot at connector end ── */
+  .clc-step:not(:last-child)::before {
+    content       : '';
+    position      : absolute;
+    top           : 30px;
+    right         : calc(-50% + 34px);
+    width         : 5px;
+    height        : 5px;
+    border-radius : 50%;
+    background    : var(--clc-dot);
+    z-index       : 1;
+  }
+
+  /* ── Icon Card ── */
+  .clc-step__card {
+    position        : relative;
+    z-index         : 1;
+    width           : 68px;
+    height          : 68px;
+    border-radius   : 16px;
+    border          : 1px solid var(--clc-card-border);
+    background      : var(--clc-card-bg);
+    backdrop-filter : blur(4px);
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    margin-bottom   : 16px;
+    transition      : transform 0.28s ease,
+                      box-shadow 0.28s ease,
+                      border-color 0.28s ease,
+                      background 0.28s ease;
+  }
+
+  .clc-step__card svg {
+    width          : 26px;
+    height         : 26px;
+    fill           : none;
+    stroke         : rgba(255,255,255,0.76);
+    stroke-width   : 1.6;
+    stroke-linecap : round;
+    stroke-linejoin: round;
+    transition     : stroke 0.25s;
+  }
+
+  /* Hover */
+  .clc-step:hover .clc-step__card {
+    transform    : translateY(-5px);
+    border-color : rgba(100,168,255,0.40);
+    box-shadow   : 0 10px 30px rgba(20,70,200,0.28), 0 2px 8px rgba(0,0,0,0.35);
+    background   : rgba(255,255,255,0.085);
+  }
+  .clc-step:hover .clc-step__card svg { stroke: #93c5fd; }
+
+  /* ── Migrate: darkest card (active look from screenshot) ── */
+  .clc-step--migrate .clc-step__card {
+    background   : var(--clc-card-migrate);
+    border-color : rgba(255,255,255,0.16);
+    box-shadow   : 0 4px 22px rgba(4,16,48,0.60);
+  }
+
+  /* ── Operate: slightly different card shade ── */
+  .clc-step--operate .clc-step__card {
+    background   : var(--clc-card-operate);
+    border-color : rgba(255,255,255,0.12);
+  }
+
+  /* ── Label ── */
+  .clc-step__label {
+    font-size     : 13px;
+    font-weight   : 400;
+    color         : var(--clc-label);
+    letter-spacing: 0.01em;
+    transition    : color 0.25s;
+  }
+
+  .clc-step:hover .clc-step__label     { color: #ffffff; }
+  .clc-step--migrate .clc-step__label  { color: #ffffff; font-weight: 500; }
+
+  /* ═══════════════════════════════════════
+     TABLET  ≤ 900px
+  ═══════════════════════════════════════ */
+  @media (max-width: 900px) {
+    .clc-section { padding: 54px 5% 66px; }
+
+    .clc-inner {
+      grid-template-columns: 1fr;
+      grid-template-rows   : auto auto auto;
+      row-gap              : 38px;
+    }
+
+    .clc-badge   { grid-column: 1; grid-row: 1; }
+    .clc-heading { grid-column: 1; grid-row: 2; }
+
+    .clc-steps {
+      grid-column    : 1;
+      grid-row       : 3;
+      flex-wrap      : wrap;
+      justify-content: center;
+      gap            : 30px 0;
+    }
+
+    .clc-step {
+      flex     : 0 0 33.333%;
+      max-width: 33.333%;
+    }
+
+    .clc-step::before,
+    .clc-step::after { display: none; }
+  }
+
+  /* ═══════════════════════════════════════
+     MOBILE  ≤ 540px
+  ═══════════════════════════════════════ */
+  @media (max-width: 540px) {
+    .clc-section { padding: 42px 5% 54px; }
+
+    .clc-heading__title { font-size: 1.45rem; }
+
+    .clc-steps {
+      flex-direction: column;
+      align-items   : stretch;
+      gap           : 0;
+    }
+
+    .clc-step {
+      flex          : none;
+      max-width     : 100%;
+      flex-direction: row;
+      align-items   : center;
+      gap           : 18px;
+      padding       : 15px 0;
+      border-bottom : 1px solid rgba(255,255,255,0.07);
+    }
+
+    .clc-step:last-child { border-bottom: none; }
+
+    .clc-step__card {
+      flex-shrink   : 0;
+      width         : 54px;
+      height        : 54px;
+      border-radius : 13px;
+      margin-bottom : 0;
+    }
+
+    .clc-step__card svg { width: 22px; height: 22px; }
+
+    .clc-step__label    { text-align: left; font-size: 14px; }
+
+    .clc-step::before,
+    .clc-step::after { display: none; }
+  }
+  </style>
+</head>
+<body >
+
+<section class="clc-section" aria-label="Cloud Lifecycle Management">
+  <div class="clc-inner">
+
+    <!-- ── TOP LEFT ── -->
+    <div class="clc-badge">
+      <p class="clc-badge__text">Global Milestones.<br>Trusted Worldwide.</p>
+    </div>
+
+    <!-- ── TOP RIGHT ── -->
+    <div class="clc-heading">
+      <h2 class="clc-heading__title">Engineered for Performance. Built for Scale.</h2>
+      <p  class="clc-heading__sub">Our systematic approach to cloud lifecycle management.</p>
+    </div>
+
+    <!-- ── STEPS ROW ── -->
+    <div class="clc-steps" role="list">
+
+      <!-- 1 · Assess -->
+      <div class="clc-step clc-step--assess" role="listitem" aria-label="Assess">
+        <div class="clc-step__card">
+          <svg viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <circle cx="11" cy="14" r="2.5"/>
+            <line x1="13" y1="16" x2="15.5" y2="18.5"/>
+          </svg>
+        </div>
+        <span class="clc-step__label">Assess</span>
+      </div>
+
+      <!-- 2 · Architect -->
+      <div class="clc-step clc-step--architect" role="listitem" aria-label="Architect">
+        <div class="clc-step__card">
+          <svg viewBox="0 0 24 24">
+            <rect x="3"  y="10" width="6"  height="11" rx="1"/>
+            <rect x="9"  y="5"  width="6"  height="16" rx="1"/>
+            <rect x="15" y="13" width="6"  height="8"  rx="1"/>
+            <line x1="3" y1="22" x2="21" y2="22"/>
+          </svg>
+        </div>
+        <span class="clc-step__label">Architect</span>
+      </div>
+
+      <!-- 3 · Migrate  (active) -->
+      <div class="clc-step clc-step--migrate" role="listitem" aria-label="Migrate">
+        <div class="clc-step__card">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2c0 0 7 3.5 7 10.5 0 3.9-2.3 7.1-7 9.5-4.7-2.4-7-5.6-7-9.5C5 5.5 12 2 12 2z"/>
+            <circle cx="12" cy="11" r="2.2"/>
+            <path d="M8.5 19.5 7 22M15.5 19.5 17 22"/>
+          </svg>
+        </div>
+        <span class="clc-step__label">Migrate</span>
+      </div>
+
+      <!-- 4 · Operate -->
+      <div class="clc-step clc-step--operate" role="listitem" aria-label="Operate">
+        <div class="clc-step__card">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </div>
+        <span class="clc-step__label">Operate</span>
+      </div>
+
+      <!-- 5 · Optimize -->
+      <div class="clc-step clc-step--optimize" role="listitem" aria-label="Optimize">
+        <div class="clc-step__card">
+          <svg viewBox="0 0 24 24">
+            <polyline points="3 17 9 11 13 15 21 7"/>
+            <polyline points="15 7 21 7 21 13"/>
+          </svg>
+        </div>
+        <span class="clc-step__label">Optimize</span>
+      </div>
+
+      <!-- 6 · Secure -->
+      <div class="clc-step clc-step--secure" role="listitem" aria-label="Secure">
+        <div class="clc-step__card">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <span class="clc-step__label">Secure</span>
+      </div>
+
+    </div><!-- /clc-steps -->
+  </div><!-- /clc-inner -->
+</section>
+
+</body>
+</html>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Process Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+  <style>
+  /* ═══════════════════════════════════════
+     RESET
+  ═══════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  /* ═══════════════════════════════════════
+     TOKENS
+  ═══════════════════════════════════════ */
+  :root {
+    --opr-bg          : #ffffff;
+    --opr-card-bg     : #ffffff;
+    --opr-card-mid-bg : linear-gradient(145deg, #f0f7ff 0%, #e4f0fb 100%);
+    --opr-border      : rgba(180, 210, 240, 0.60);
+    --opr-text-dark   : #0d1f3c;
+    --opr-text-body   : #4a5a72;
+    --opr-text-muted  : #6b7a90;
+    --opr-icon        : #1a6fd4;
+    --opr-watermark   : rgba(200, 218, 238, 0.42);
+    --opr-shadow      : 0 2px 16px rgba(30, 80, 160, 0.07);
+    --opr-shadow-hov  : 0 8px 32px rgba(30, 80, 160, 0.13);
+    --opr-radius      : 18px;
+  }
+
+  /* ═══════════════════════════════════════
+     SECTION SHELL
+  ═══════════════════════════════════════ */
+  .opr-section {
+    position   : relative;
+    width      : 100%;
+    overflow   : hidden;
+    background : var(--opr-bg);
+    font-family: 'Manrope', sans-serif;
+    /* top padding is 0 so the watermark bleeds from very top */
+    padding    : 0 0 80px;
+  }
+
+  /* ── Light blue radial blob in the background mid-section ── */
+  .opr-section__blob {
+    position      : absolute;
+    top           : 30%;
+    left          : 50%;
+    transform     : translateX(-50%);
+    width         : 70%;
+    height        : 55%;
+    background    : radial-gradient(ellipse at center,
+                      rgba(190, 220, 245, 0.32) 0%,
+                      rgba(210, 230, 250, 0.14) 50%,
+                      transparent 75%);
+    pointer-events: none;
+    z-index       : 0;
+  }
+
+  /* ═══════════════════════════════════════
+     WATERMARK  — edge-to-edge, single line
+  ═══════════════════════════════════════ */
+  .opr-watermark {
+    position      : relative;
+    z-index       : 0;
+    width         : 100%;
+    overflow      : hidden;
+    line-height   : 0.88;
+    /* negative margin so watermark overlaps into card area */
+    margin-bottom : -0.06em;
+    pointer-events: none;
+    user-select   : none;
+  }
+
+  .opr-watermark__text {
+    display       : block;
+    width         : 100%;
+    text-align    : center;
+    /* font size large enough that text bleeds beyond both edges */
+    font-size     : 22vw;
+    font-weight   : 800;
+    font-family   : 'Manrope', sans-serif;
+    letter-spacing: -0.04em;
+    white-space   : nowrap;
+    color         : var(--opr-watermark);
+    line-height   : 1;
+  }
+
+  /* ═══════════════════════════════════════
+     META ROW  (badge · headline)
+  ═══════════════════════════════════════ */
+  .opr-meta {
+    position              : relative;
+    z-index               : 1;
+    display               : grid;
+    grid-template-columns : 220px 1fr;
+    column-gap            : 40px;
+    align-items           : start;
+    max-width             : 1240px;
+    margin                : 0 auto 48px;
+    padding               : 0 5%;
+  }
+
+  .opr-meta__badge p {
+    font-size     : 11.5px;
+    font-weight   : 600;
+    line-height   : 1.65;
+    color         : var(--opr-text-body);
+    letter-spacing: 0.005em;
+  }
+
+  .opr-meta__headline {
+    font-size     : clamp(1.4rem,);
+    font-weight   : 700;
+    color         : var(--opr-text-dark);
+    line-height   : 1.35;
+    letter-spacing: -0.022em;
+    max-width     : 620px;
+  }
+
+  /* ═══════════════════════════════════════
+     CARDS GRID
+     Left col  = card 1 (tall, no icon)
+     Mid col   = card 2 + card 3 stacked
+     Right col = card 4 (tall, no icon)
+  ═══════════════════════════════════════ */
+  .opr-grid {
+    position              : relative;
+    z-index               : 1;
+    max-width             : 1240px;
+    margin                : 0 auto;
+    padding               : 0 5%;
+    display               : grid;
+    grid-template-columns : 1fr 1.1fr 1fr;
+    grid-template-rows    : 1fr 1fr;
+    gap                   : 14px;
+  }
+
+  /* ── Base card ── */
+  .opr-card {
+    background   : var(--opr-card-bg);
+    border       : 1px solid var(--opr-border);
+    border-radius: var(--opr-radius);
+    padding      : 30px 28px 32px;
+    box-shadow   : var(--opr-shadow);
+    transition   : box-shadow 0.28s ease, transform 0.28s ease;
+    position     : relative;
+    overflow     : hidden;
+  }
+
+  .opr-card:hover {
+    box-shadow: var(--opr-shadow-hov);
+    transform : translateY(-3px);
+  }
+
+  /* ── Card 1: outer left, spans both rows ── */
+  .opr-card--1 {
+    grid-column: 1;
+    grid-row   : 1 / 3;
+    display    : flex;
+    flex-direction: column;
+  }
+
+  /* ── Card 2: middle top ── */
+  .opr-card--2 {
+    grid-column: 2;
+    grid-row   : 1;
+    background : linear-gradient(145deg, #f2f8ff 0%, #e3effc 100%);
+  }
+
+  /* ── Card 3: middle bottom ── */
+  .opr-card--3 {
+    grid-column: 2;
+    grid-row   : 2;
+    background : linear-gradient(145deg, #f2f8ff 0%, #e3effc 100%);
+  }
+
+  /* ── Card 4: outer right, spans both rows ── */
+  .opr-card--4 {
+    grid-column: 3;
+    grid-row   : 1 / 3;
+    display    : flex;
+    flex-direction: column;
+  }
+
+  /* ── Ghost building in card 1 ── */
+  .opr-card--1::after {
+    content   : '';
+    position  : absolute;
+    bottom    : -8px;
+    left      : -8px;
+    width     : 220px;
+    height    : 180px;
+    opacity   : 0.10;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 180'%3E%3Crect x='8'  y='60'  width='50' height='120' rx='4' fill='%231a6fd4'/%3E%3Crect x='18' y='42'  width='20' height='18'  rx='2' fill='%231a6fd4'/%3E%3Crect x='12' y='72'  width='10' height='12' rx='1' fill='white' opacity='.5'/%3E%3Crect x='26' y='72'  width='10' height='12' rx='1' fill='white' opacity='.5'/%3E%3Crect x='12' y='92'  width='10' height='12' rx='1' fill='white' opacity='.5'/%3E%3Crect x='26' y='92'  width='10' height='12' rx='1' fill='white' opacity='.5'/%3E%3Crect x='68' y='18'  width='74' height='162' rx='4' fill='%231a6fd4'/%3E%3Crect x='80' y='30'  width='14' height='14' rx='1' fill='white' opacity='.4'/%3E%3Crect x='100' y='30' width='14' height='14' rx='1' fill='white' opacity='.4'/%3E%3Crect x='80' y='52'  width='14' height='14' rx='1' fill='white' opacity='.4'/%3E%3Crect x='100' y='52' width='14' height='14' rx='1' fill='white' opacity='.4'/%3E%3Crect x='80' y='74'  width='14' height='14' rx='1' fill='white' opacity='.4'/%3E%3Crect x='100' y='74' width='14' height='14' rx='1' fill='white' opacity='.4'/%3E%3Crect x='152' y='75' width='44' height='105' rx='4' fill='%231a6fd4'/%3E%3C/svg%3E") no-repeat bottom left / contain;
+    pointer-events: none;
+  }
+
+  /* ── Ghost checkmark in card 4 ── */
+  .opr-card--4::after {
+    content   : '';
+    position  : absolute;
+    bottom    : -16px;
+    right     : -14px;
+    width     : 160px;
+    height    : 160px;
+    opacity   : 0.10;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolyline points='12,52 36,78 88,20' fill='none' stroke='%231a6fd4' stroke-width='11' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center / contain;
+    pointer-events: none;
+  }
+
+  /* ── Icon ── */
+  .opr-card__icon {
+    margin-bottom: 14px;
+  }
+
+  .opr-card__icon svg {
+    width          : 34px;
+    height         : 34px;
+    fill           : none;
+    stroke         : var(--opr-icon);
+    stroke-width   : 1.7;
+    stroke-linecap : round;
+    stroke-linejoin: round;
+  }
+
+  /* ── Title ── */
+  .opr-card__title {
+    font-size     : 15.5px;
+    font-weight   : 700;
+    color         : var(--opr-text-dark);
+    line-height   : 1.3;
+    margin-bottom : 11px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── Body ── */
+  .opr-card__body {
+    font-size  : 13px;
+    font-weight: 400;
+    color      : var(--opr-text-body);
+    line-height: 1.68;
+  }
+
+  /* ═══════════════════════════════════════
+     TABLET  ≤ 860px
+  ═══════════════════════════════════════ */
+  @media (max-width: 860px) {
+    .opr-section { padding-bottom: 60px; }
+
+    .opr-watermark__text { font-size: 26vw; }
+
+    .opr-meta {
+      grid-template-columns: 1fr;
+      gap          : 16px;
+      margin-bottom: 36px;
+    }
+
+    .opr-meta__headline { font-size: 1.4rem; max-width: 100%; }
+
+    .opr-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows   : auto auto auto;
+      gap                  : 12px;
+    }
+
+    .opr-card--1 { grid-column: 1; grid-row: 1; }
+    .opr-card--2 { grid-column: 2; grid-row: 1; }
+    .opr-card--3 { grid-column: 1; grid-row: 2; }
+    .opr-card--4 { grid-column: 2; grid-row: 2; }
+
+    /* reset row span */
+    .opr-card--1,
+    .opr-card--4 { grid-row: auto; }
+  }
+
+  /* ═══════════════════════════════════════
+     MOBILE  ≤ 520px
+  ═══════════════════════════════════════ */
+  @media (max-width: 520px) {
+    .opr-section { padding-bottom: 48px; }
+
+    .opr-watermark__text { font-size: 32vw; }
+
+    .opr-meta { padding: 0 4%; margin-bottom: 28px; }
+
+    .opr-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows   : auto;
+      padding: 0 4%;
+    }
+
+    .opr-card--1,
+    .opr-card--2,
+    .opr-card--3,
+    .opr-card--4 {
+      grid-column: 1;
+      grid-row   : auto;
+    }
+
+    .opr-card { padding: 22px 20px 26px; }
+
+    .opr-card--1::after,
+    .opr-card--4::after { opacity: 0.07; }
+  }
+  </style>
+</head>
+<body style="margin:0;background:#fff;">
+
+<section class="opr-section" aria-label="Our Process">
+
+  <!-- background blob -->
+  <div class="opr-section__blob" aria-hidden="true"></div>
+
+  <!-- ── WATERMARK: edge-to-edge single line ── -->
+  <div class="opr-watermark" aria-hidden="true">
+    <span class="opr-watermark__text">our process</span>
+  </div>
+
+  <!-- ── META ROW ── -->
+  <div class="opr-meta">
+    <div class="opr-meta__badge">
+      <p>Performance Backed By<br>Security Metrics</p>
+    </div>
+    <h2 class="opr-meta__headline">
+      We provide data-driven outcomes that strengthen your security posture, improve response times, and ensure business continuity.
+    </h2>
+  </div>
+
+  <!-- ── CARDS GRID ── -->
+  <div class="opr-grid">
+
+    <!-- 1 · Business-Aligned Strategy (tall, left) -->
+    <div class="opr-card opr-card--1">
+      <h3 class="opr-card__title">1.&nbsp; Business-Aligned Strategy</h3>
+      <p  class="opr-card__body">We bridge the gap between technical infrastructure and your core business objectives.</p>
+    </div>
+
+    <!-- 2 · End-to-End Ownership (middle top) -->
+    <div class="opr-card opr-card--2">
+      <div class="opr-card__icon">
+        <!-- refresh/cycle icon -->
+        <svg viewBox="0 0 24 24">
+          <path d="M20 11A8 8 0 1 0 4.93 17"/>
+          <polyline points="20 4 20 11 13 11"/>
+          <circle cx="12" cy="12" r="2.2"/>
+        </svg>
+      </div>
+      <h3 class="opr-card__title">2.&nbsp; End-to-End Ownership</h3>
+      <p  class="opr-card__body">From first assessment to daily 24/7 operations, we are your single point of accountability.</p>
+    </div>
+
+    <!-- 3 · Multi-Cloud Expertise (middle bottom) -->
+    <div class="opr-card opr-card--3">
+      <div class="opr-card__icon">
+        <!-- cloud icon -->
+        <svg viewBox="0 0 24 24">
+          <path d="M18 10h-.3A7 7 0 1 0 5 15.9"/>
+          <path d="M18 10a4 4 0 0 1 0 8H7a5 5 0 0 1-.8-9.9"/>
+        </svg>
+      </div>
+      <h3 class="opr-card__title">3.&nbsp; Multi-Cloud Expertise</h3>
+      <p  class="opr-card__body">Avoid vendor lock-in with specialized teams across AWS, Azure, and Google Cloud.</p>
+    </div>
+
+    <!-- 4 · Enterprise Security (tall, right) -->
+    <div class="opr-card opr-card--4">
+      <h3 class="opr-card__title">4.&nbsp; Enterprise Security</h3>
+      <p  class="opr-card__body">Security isn't an afterthought; it's baked into every layer of the architecture.</p>
+    </div>
+
+  </div><!-- /opr-grid -->
+</section>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Results Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ─── Section ─── */
+    .drv-section {
+      position: relative;
+      width: 100%;
+      background-image: url('images/new-sec-bg.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      font-family: 'Barlow', sans-serif;
+      color: #ffffff;
+      overflow: hidden;
+    }
+
+    .drv-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg,
+        rgba(2, 20, 60, 0.55) 0%,
+        rgba(5, 30, 80, 0.35) 50%,
+        rgba(2, 20, 60, 0.50) 100%);
+      z-index: 0;
+    }
+
+    .drv-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 52px 40px;
+    }
+
+    /* ─── Top Row ─── */
+    .drv-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 28px;
+      align-items: start;
+    }
+
+    .drv-headline {
+      font-size: clamp(24px, 2.8vw, 38px);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+      color: #e8f0ff;
+    }
+
+    .drv-desc {
+      font-size: clamp(12px, 1.05vw, 14px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: rgba(210, 225, 255, 0.82);
+    }
+
+    /* ─── Rows ─── */
+    .drv-cards-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Row 1: 70% | 30% */
+    .drv-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .drv-row--70-30 {
+      grid-template-columns: 70fr 30fr;
+    }
+
+    /* Row 2: 30% | 70% */
+    .drv-row--30-70 {
+      grid-template-columns: 40fr 60fr;
+    }
+
+    /* ─── Each Box ─── */
+    .drv-box {
+      background: rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 10px;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      min-height: 145px;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .drv-box:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    /* ─── Text content ─── */
+    .drv-box__text {
+      font-size: clamp(11.5px, 1.05vw, 14px);
+      font-weight: 400;
+      color: rgba(220, 235, 255, 0.88);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    /* ─── Stat content ─── */
+    .drv-box__stat-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .drv-box__label {
+      font-size: clamp(9px, 0.78vw, 11.5px);
+      font-weight: 500;
+      color: rgba(160, 200, 255, 0.78);
+      letter-spacing: 0.04em;
+      line-height: 1.3;
+      white-space: nowrap;
+    }
+
+    .drv-box__stat {
+      font-family: 'gilroy', sans-serif;
+      font-size: clamp(42px, 5.2vw, 72px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      background: linear-gradient(134deg, #2559CA 0%, #3AB8F1 52.43%, #2EDEDB 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─────────────────────────────────────────
+       TABLET  (768px – 1023px)
+    ───────────────────────────────────────── */
+    @media (max-width: 1023px) {
+      .drv-inner { padding: 40px 28px; }
+
+      .drv-top {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .drv-row--70-30,
+      .drv-row--30-70 {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .drv-box {
+        min-height: 120px;
+        padding: 22px 22px;
+      }
+    }
+
+    /* ─────────────────────────────────────────
+       MOBILE  (≤ 767px)
+    ───────────────────────────────────────── */
+    @media (max-width: 767px) {
+      .drv-inner { padding: 28px 16px; }
+
+      .drv-top {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        margin-bottom: 20px;
+      }
+
+      .drv-row--70-30,
+      .drv-row--30-70 {
+        grid-template-columns: 1fr;
+      }
+
+      .drv-box {
+        min-height: 100px;
+        padding: 18px 18px;
+      }
+
+      .drv-box__stat {
+        font-size: clamp(36px, 11vw, 52px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="drv-section">
+  <div class="drv-inner">
+
+    <!-- Top: Headline + Description -->
+    <div class="drv-top">
+      <h2 class="drv-headline">Driven by consistent results and continuous improvement</h2>
+      <p class="drv-desc">
+        Our digital workplace solutions are designed to enhance collaboration, improve productivity,
+        and enable secure access to tools and data from anywhere. We help organizations create
+        flexible, connected work environments that support modern ways of working and drive
+        business efficiency.
+      </p>
+    </div>
+
+    <div class="drv-cards-wrap">
+
+      <!-- Row 1: Box 70% | Box 30% -->
+      <div class="drv-row drv-row--70-30">
+
+        <!-- Box 1 (70%) — text left, stat right -->
+        <div class="drv-box">
+          <p class="drv-box__text">Delivering quality-driven projects with measurable outcomes.</p>
+          <div class="drv-box__stat-wrap">
+            <span class="drv-box__label">Cost Reduction</span>
+            <span class="drv-box__stat">40%</span>
+          </div>
+        </div>
+
+        <!-- Box 2 (30%) — stat only, centered -->
+        <div class="drv-box">
+          <div class="drv-box__stat-wrap">
+            <span class="drv-box__label">Faster Deployment</span>
+            <span class="drv-box__stat">5x</span>
+          </div>
+          <p class="drv-box__text">Experienced professionals driving innovation across global engagements.</p>
+        </div>
+
+      </div>
+
+      <!-- Row 2: Box 30% | Box 70% -->
+      <div class="drv-row drv-row--30-70">
+
+        <!-- Box 3 (30%) — stat + small text -->
+        <div class="drv-box">
+          <p class="drv-box__text">Supporting global clients with scalable solutions and strong delivery capabilities.</p>
+          <div class="drv-box__stat-wrap">
+            <span class="drv-box__label">Compliance Rate</span>
+            <span class="drv-box__stat">100%</span>
+          </div>
+        </div>
+
+        <!-- Box 4 (70%) — stat left, text right -->
+        <div class="drv-box">
+          <div class="drv-box__stat-wrap">
+            <span class="drv-box__label">Agility Increase</span>
+            <span class="drv-box__stat">65%</span>
+          </div>
+          <p class="drv-box__text">Strategic partnerships enhancing capabilities and delivering better solutions.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Sora',sans-serif;background:#fff;overflow-x:hidden;}
+ 
+.cs-section{
+  position:relative;
+  background:#fff;
+  overflow:hidden;
+  width:100%;
+  padding-bottom:48px;
+}
+ 
+/* ── WATERMARK ── */
+.cs-wm{
+  position:absolute;
+  top:0; left:0; right:0;
+  pointer-events:none;
+  user-select:none;
+  z-index:0;
+  overflow:hidden;
+}
+.cs-wm span{
+  display:block;
+  font-weight:900;
+  white-space:nowrap;
+  line-height:0.88;
+  letter-spacing:-1px;
+  font-size:clamp(72px,14.5vw,168px);
+}
+.cs-wm span:nth-child(1){color:#e3e5e9;}
+.cs-wm span:nth-child(2){color:#ecedf0;}
+.cs-wm span:nth-child(3){color:#f4f5f6;}
+ 
+/* ── MAIN GRID ── */
+.cs-grid{
+  position:relative;
+  z-index:1;
+  display:grid;
+  grid-template-columns:42% 1fr;
+  min-height:500px;
+  padding-top:clamp(130px,21vw,240px);
+}
+ 
+/* ── LEFT ── */
+.cs-left{
+  display:flex;
+  align-items:flex-end;
+  padding:0 36px 16px 56px;
+}
+.cs-left-inner{display:flex;flex-direction:column;gap:14px;}
+.cs-meta{font-size:11.5px;font-weight:500;color:#9ca3af;letter-spacing:0.01em;}
+.cs-title{
+  font-size:clamp(17px,2vw,24px);
+  font-weight:700;
+  color:#111827;
+  line-height:1.38;
+}
+.cs-title .light{font-weight:400;color:#9ca3af;}
+ 
+/* View All Cases button — outline pill, arrow circle inside */
+.btn-all{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:1.5px solid #d1d5db;
+  border-radius:50px;
+  padding:9px 20px 9px 10px;
+  font-size:12.5px;
+  font-weight:600;
+  color:#374151;
+  text-decoration:none;
+  width:fit-content;
+  transition:border-color .2s,color .2s;
+  cursor:pointer;
+  background:transparent;
+}
+.btn-all:hover{border-color:#1a1a1a;color:#1a1a1a;}
+.btn-all:hover .arr-dark{background:#1a1a1a;}
+.arr-dark{
+  width:28px;height:28px;border-radius:50%;
+  background:#1f2937;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:background .2s;
+}
+.arr-dark svg{stroke:#fff;}
+ 
+/* ── RIGHT CARD ── */
+.cs-right{
+  position:relative;
+  border-radius:18px 0 0 18px;
+  overflow:hidden;
+  min-height:480px;
+}
+.cs-slide-track{
+  display:flex;
+  width:100%;height:100%;
+  transition:transform .45s cubic-bezier(.4,0,.2,1);
+}
+.cs-slide{
+  flex:0 0 100%;
+  width:100%;height:100%;
+  position:relative;
+}
+.cs-slide img{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+}
+.cs-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(5,15,50,.02) 30%,rgba(5,15,50,.72) 100%);
+}
+.cs-card-body{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:clamp(18px,3vw,28px);
+  z-index:2;
+}
+.cs-card-tag{font-size:11px;font-weight:600;color:rgba(255,255,255,.7);margin-bottom:8px;}
+.cs-card-title{
+  font-size:clamp(14px,1.7vw,20px);
+  font-weight:700;
+  color:#fff;
+  line-height:1.42;
+  margin-bottom:18px;
+}
+ 
+/* View Case Study button — ghost pill on dark bg */
+.btn-case{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  border:1.5px solid rgba(255,255,255,.45);
+  border-radius:50px;
+  padding:8px 20px 8px 10px;
+  font-size:12px;
+  font-weight:600;
+  color:#fff;
+  text-decoration:none;
+  width:fit-content;
+  transition:background .2s,border-color .2s;
+  cursor:pointer;
+  background:transparent;
+}
+.btn-case:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.7);}
+.arr-white{
+  width:26px;height:26px;border-radius:50%;
+  background:rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.arr-white svg{stroke:#fff;}
+ 
+/* ── BOTTOM BAR ── */
+.cs-bottom{
+  position:relative;z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:28px 0 0;
+  margin: 0 56px;
+}
+.cs-bottom-spacer{flex:0 0 42%;}
+ 
+.cs-counter{display:flex;align-items:baseline;gap:3px;}
+.cs-cur{
+  font-size:clamp(32px,5vw,52px);
+  font-weight:800;
+  background:linear-gradient(135deg,#1a56db,#06b6d4);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  line-height:1;
+}
+.cs-sep,.cs-tot{font-size:clamp(14px,1.8vw,20px);color:#b0b7c3;font-weight:400;}
+ 
+.cs-nav{display:flex;gap:10px;}
+/* Nav buttons — circle outline with arrow, NO fill */
+.nav-btn{
+  width:42px;height:42px;
+  border-radius:50%;
+  border:1.5px solid #d1d5db;
+  background:transparent;
+  color:#374151;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,color .2s;
+}
+.nav-btn:hover{border-color:#374151;color:#111;}
+ 
+/* ── RESPONSIVE ── */
+@media(max-width:680px){
+  .cs-grid{grid-template-columns:1fr;padding-top:clamp(80px,26vw,180px);}
+  .cs-left{padding:0 20px 20px;align-items:flex-start;}
+  .cs-right{border-radius:0 0 18px 18px;min-height:360px;margin:0 16px;border-radius:18px;}
+  .cs-bottom{margin:0 20px;flex-wrap:wrap;gap:12px;}
+  .cs-bottom-spacer{display:none;}
+}
+</style>
+</head>
+<body>
+<section class="cs-section">
+ 
+  <!-- Watermark -->
+  <div class="cs-wm" aria-hidden="true">
+    <span>case studies</span>
+    <span>case studies</span>
+    <span>case studies</span>
+  </div>
+ 
+  <!-- Grid -->
+  <div class="cs-grid">
+ 
+    <!-- Left text -->
+    <div class="cs-left">
+      <div class="cs-left-inner" id="csLeft"></div>
+    </div>
+ 
+    <!-- Right image card -->
+    <div class="cs-right">
+      <div class="cs-slide-track" id="csTrack"></div>
+    </div>
+ 
+  </div>
+ 
+  <!-- Bottom bar -->
+  <div class="cs-bottom">
+    <div class="cs-bottom-spacer"></div>
+    <div class="cs-counter">
+      <span class="cs-cur" id="csCur">01</span>
+      <span class="cs-sep">&thinsp;/</span>
+      <span class="cs-tot" id="csTot">03</span>
+    </div>
+    <div class="cs-nav">
+      <button class="nav-btn" id="csPrev" aria-label="Previous">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="nav-btn" id="csNext" aria-label="Next">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+ 
+</section>
+ 
+<script>
+(function(){
+  var SLIDES = [
+    {
+      meta: 'Strengthening Enterprise Cybersecurity',
+      leftTitle: 'Implemented AI-driven security to reduce threats',
+      leftLight: ' and improve real-time response.',
+      cardTag: 'Driving Data-Driven Decisions',
+      cardTitle: 'Implemented analytics and reporting solutions to enable real-time insights, improve visibility, and support strategic decision-making.',
+      image: 'images/Casestudy-img-right.png'
+    },
+    {
+      meta: 'Cloud Infrastructure',
+      leftTitle: 'Built scalable cloud architecture',
+      leftLight: ' enabling 99.9% uptime and global reach.',
+      cardTag: 'Cloud & Reliability',
+      cardTitle: 'Designed and deployed multi-region cloud infrastructure to support enterprise-grade performance and business continuity.',
+      image: 'images/card-img-1.png'
+    },
+    {
+      meta: 'Managed IT Services',
+      leftTitle: 'Streamlined IT operations end-to-end',
+      leftLight: ' and reduced downtime by 60%.',
+      cardTag: 'Operational Efficiency',
+      cardTitle: 'Delivered end-to-end managed services covering monitoring, support, and proactive maintenance across 12 global offices.',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&h=640&fit=crop'
+    }
+  ];
+ 
+  var cur = 0, total = SLIDES.length, busy = false;
+  var track = document.getElementById('csTrack');
+  var leftEl = document.getElementById('csLeft');
+  var curEl = document.getElementById('csCur');
+  var totEl = document.getElementById('csTot');
+ 
+  totEl.textContent = String(total).padStart(2,'0');
+ 
+  function arrowSVG(dir){
+    var d = dir==='right' ? 'M9 18 15 12 9 6' : 'M15 18 9 12 15 6';
+    return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="'+d+'"/></svg>';
+  }
+ 
+  function slideHTML(s){
+    return '<div class="cs-slide"><img src="'+s.image+'" alt="'+s.cardTag+'"/><div class="cs-overlay"></div><div class="cs-card-body"><p class="cs-card-tag">'+s.cardTag+'</p><p class="cs-card-title">'+s.cardTitle+'</p><a href="#" class="btn-case"><span class="arr-white">'+arrowSVG('right')+'</span>View Case Study</a></div></div>';
+  }
+ 
+  function leftHTML(s){
+    return '<p class="cs-meta">'+s.meta+'</p><h3 class="cs-title">'+s.leftTitle+'<span class="light">'+s.leftLight+'</span></h3><a href="#" class="btn-all"><span class="arr-dark">'+arrowSVG('right')+'</span>View All Cases</a>';
+  }
+ 
+  function goTo(next, dir){
+    if(busy) return; busy = true;
+    next = (next + total) % total;
+    var offset = dir === 1 ? '-100%' : '100%';
+    track.style.transition = 'transform .45s cubic-bezier(.4,0,.2,1)';
+    track.style.transform = 'translateX('+offset+')';
+    setTimeout(function(){
+      cur = next;
+      track.style.transition = 'none';
+      track.style.transform = 'translateX(0)';
+      track.innerHTML = slideHTML(SLIDES[cur]);
+      leftEl.innerHTML = leftHTML(SLIDES[cur]);
+      curEl.textContent = String(cur+1).padStart(2,'0');
+      busy = false;
+    }, 460);
+  }
+ 
+  // Scale watermark to full width
+  function scaleWM(){
+    var probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;font-weight:900;font-size:100px;letter-spacing:-1px;font-family:Sora,sans-serif;';
+    probe.textContent = 'case studies';
+    document.body.appendChild(probe);
+    var tw = probe.getBoundingClientRect().width;
+    document.body.removeChild(probe);
+    var fs = Math.floor((window.innerWidth / tw) * 100);
+    document.querySelectorAll('.cs-wm span').forEach(function(s){ s.style.fontSize = fs+'px'; });
+  }
+ 
+  document.getElementById('csPrev').onclick = function(){ goTo(cur-1,-1); };
+  document.getElementById('csNext').onclick = function(){ goTo(cur+1, 1); };
+ 
+  track.innerHTML = slideHTML(SLIDES[0]);
+  leftEl.innerHTML = leftHTML(SLIDES[0]);
+  scaleWM();
+  window.addEventListener('resize', scaleWM);
+})();
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Technology Ecosystem</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --te-accent-blue: #2196f3;
+      --te-accent-cyan: #00e5ff;
+      --te-grid-color: rgba(33, 150, 243, 0.12);
+      --te-card-bg: rgba(10, 20, 50, 0.75);
+      --te-border: rgba(0, 229, 255, 0.18);
+      --te-text-primary: #ffffff;
+      --te-text-muted: rgba(200, 220, 255, 0.75);
+      --te-label-color: #00e5ff;
+      --te-logo-bg: rgba(10, 22, 55, 0.82);
+      --te-logo-border: rgba(0, 229, 255, 0.22);
+      --te-logo-hover-border: rgba(0, 229, 255, 0.65);
+      --te-radius: 14px;
+      --te-logo-radius: 12px;
+    }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: #050d1f;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    .te-section {
+      position: relative;
+      width: 100%;
+      min-height: 420px;
+      overflow: hidden;
+      /* Replace with your actual background image */
+      background-image: url('YOUR_BG_IMAGE.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Dark overlay */
+    .te-section__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        120deg,
+        rgba(4, 12, 38, 0.97) 0%,
+        rgba(4, 14, 42, 0.88) 45%,
+        rgba(4, 14, 42, 0.55) 70%,
+        rgba(4, 14, 42, 0.25) 100%
+      );
+      z-index: 1;
+    }
+
+    /* Grid lines overlay */
+    .te-section__grid {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background-image:
+        linear-gradient(var(--te-grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--te-grid-color) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    /* ── INNER CONTAINER ── */
+    .te-container {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 48px;
+      display: flex;
+      align-items: center;
+      gap: 56px;
+    }
+
+    /* ── LEFT COLUMN ── */
+    .te-left {
+      flex: 0 0 auto;
+      width: 52%;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .te-left__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--te-label-color);
+    }
+
+    .te-left__heading {
+      font-size: clamp(26px, 3.2vw, 42px);
+      font-weight: 700;
+      color: var(--te-text-primary);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .te-left__desc {
+      font-size: clamp(13px, 1.3vw, 15px);
+      font-weight: 300;
+      color: var(--te-text-muted);
+      line-height: 1.75;
+      max-width: 420px;
+    }
+
+    /* ── LOGO GRID ── */
+    .te-logo-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .te-logo-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--te-logo-bg);
+      border: 1px solid var(--te-logo-border);
+      border-radius: var(--te-logo-radius);
+      padding: 14px 10px;
+      cursor: pointer;
+      transition: border-color 0.25s ease, transform 0.22s ease, box-shadow 0.25s ease;
+      aspect-ratio: 1 / 1;
+    }
+
+    .te-logo-item:hover {
+      border-color: var(--te-logo-hover-border);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 8px 28px rgba(0, 229, 255, 0.14);
+    }
+
+    /* Replace src with your actual logo images */
+    .te-logo-item img {
+      width: 100%;
+      max-width: 42px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ── RIGHT COLUMN ── */
+    .te-right {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .te-right__img-wrap {
+      width: 100%;
+      max-width: 460px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--te-border);
+      box-shadow:
+        0 0 0 1px rgba(0, 229, 255, 0.08),
+        0 24px 80px rgba(0, 100, 255, 0.18);
+      position: relative;
+    }
+
+    .te-right__img-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(
+        135deg,
+        rgba(0, 229, 255, 0.06) 0%,
+        transparent 60%
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Replace src with your actual right image */
+    .te-right__img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ── TABLET (max 1024px) ── */
+    @media (max-width: 1024px) {
+      .te-container {
+        padding: 48px 32px;
+        gap: 36px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .te-left {
+        width: 100%;
+      }
+
+      .te-right {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .te-right__img-wrap {
+        max-width: 100%;
+      }
+
+      .te-logo-item img {
+        max-width: 36px;
+      }
+    }
+
+    /* ── MOBILE (max 640px) ── */
+    @media (max-width: 640px) {
+      .te-container {
+        padding: 36px 20px;
+        gap: 28px;
+      }
+
+      .te-logo-grid {
+        gap: 8px;
+      }
+
+      .te-logo-item {
+        padding: 10px 7px;
+        border-radius: 10px;
+      }
+
+      .te-logo-item img {
+        max-width: 28px;
+      }
+
+      .te-left__desc {
+        max-width: 100%;
+      }
+
+      .te-right__img-wrap {
+        border-radius: 12px;
+      }
+    }
+
+    /* ── MOBILE small (max 375px) ── */
+    @media (max-width: 375px) {
+      .te-logo-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+      }
+
+      .te-logo-item img {
+        max-width: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<section class="te-section">
+  <!-- Background overlay + grid -->
+  <div class="te-section__overlay"></div>
+  <div class="te-section__grid"></div>
+
+  <div class="te-container">
+
+    <!-- LEFT COLUMN -->
+    <div class="te-left">
+      <p class="te-left__label">AI Powered Tools</p>
+      <h2 class="te-left__heading">Technology Ecosystem</h2>
+      <p class="te-left__desc">
+        We leverage a comprehensive technology ecosystem to deliver secure,
+        scalable, and enterprise-grade solutions tailored to complex business
+        environments.
+      </p>
+
+      <!-- 10 Logo Grid (2 rows × 5 cols) -->
+      <div class="te-logo-grid">
+
+        <!-- Row 1 -->
+        <div class="te-logo-item">
+          <!-- Logo 1: AWS -->
+          <img src="/images/cloud1.png" alt="Amazon Web Services" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 2: Azure -->
+          <img src="/images/cloud10.png" alt="Microsoft Azure" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 3: Google Cloud -->
+          <img src="images/cloud2.png" alt="Google Cloud" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 4: VMware -->
+          <img src="images/cloud3.png" alt="VMware" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 5: Kubernetes -->
+          <img src="images/cloud8.png" alt="Kubernetes" />
+        </div>
+
+        <!-- Row 2 -->
+        <div class="te-logo-item">
+          <!-- Logo 6: Docker -->
+          <img src="images/cloud5.png" alt="Docker" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 7: Red Hat -->
+          <img src="images/cloud6.png" alt="Red Hat" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 8: Cisco -->
+          <img src="images/cloud7.png" alt="Cisco" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 9: Microsoft -->
+          <img src="images/cloud8.png" alt="Microsoft" />
+        </div>
+
+        <div class="te-logo-item">
+          <!-- Logo 10: OpenShift -->
+          <img src="images/cloud9.png" alt="OpenShift" />
+        </div>
+
+      </div>
+      <!-- /te-logo-grid -->
+    </div>
+    <!-- /te-left -->
+
+    <!-- RIGHT COLUMN -->
+    <div class="te-right">
+      <div class="te-right__img-wrap">
+        <!-- Replace with your actual right-side illustration image -->
+        <img
+          class="te-right__img"
+          src="images/AI-tools-right.png"
+          alt="Technology Cloud Infrastructure Illustration"
+        />
+      </div>
+    </div>
+    <!-- /te-right -->
+
+  </div>
+  <!-- /te-container -->
+</section>
+
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CTA + FAQ Section</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cf-bg: #f4f6fb;
+      --cf-text-dark: #0d1526;
+      --cf-text-muted: #5a6a85;
+      --cf-border: #e0e6f0;
+      --cf-accent: #1a73e8;
+      --cf-radius: 20px;
+      --cf-faq-bg: #ffffff;
+    }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--cf-bg);
+    }
+
+    /* ══════════════════════════════
+       CTA BANNER
+    ══════════════════════════════ */
+    .cf-cta {
+      max-width: 1160px;
+      margin: 0 auto 64px;
+      padding: 50px 24px;
+    }
+
+    .cf-cta__card {
+      position: relative;
+      border-radius: var(--cf-radius);
+      overflow: hidden;
+      padding: 52px 52px;
+      /* Background: dark base + wave image on the right */
+      /* Replace YOUR_CTA_WAVE_IMAGE.jpg with the actual wave/gradient image */
+      background-image: url('images/cta-bg.png');
+      background-size: cover;
+      background-position: center right;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 220px;
+    }
+
+    /* Dark overlay only on left side so text is readable */
+    .cf-cta__card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding-top: 40px !important;
+      background: linear-gradient(
+        90deg,
+        rgba(8, 14, 35, 0.92) 0%,
+        rgba(8, 14, 35, 0.78) 45%,
+        rgba(8, 14, 35, 0.10) 100%
+      );
+      z-index: 1;
+      border-radius: var(--cf-radius);
+    }
+
+    .cf-cta__inner {
+      position: relative;
+      z-index: 2;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cf-cta__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(180, 210, 255, 0.85);
+    }
+
+    .cf-cta__heading {
+      font-size: clamp(22px, 2.8vw, 36px);
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .cf-cta__desc {
+      font-size: clamp(12px, 1.2vw, 14px);
+      font-weight: 300;
+      color: rgba(200, 220, 255, 0.75);
+      line-height: 1.65;
+    }
+
+    .cf-cta__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+      padding: 13px 22px;
+      background: transparent;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 100px;
+      color: #ffffff;
+      font-family: 'Sora', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      width: fit-content;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    }
+
+    .cf-cta__btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .cf-cta__btn-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .cf-cta__btn:hover .cf-cta__btn-icon {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .cf-cta__btn-icon svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* ══════════════════════════════
+       FAQ SECTION
+    ══════════════════════════════ */
+    .cf-faq {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 40px;
+      align-items: start;
+    }
+
+    /* Watermark FAQ text on left */
+    .cf-faq__watermark {
+      position: absolute;
+      left: 0;
+      top: -20px;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      line-height: 1;
+    }
+
+    .cf-faq__watermark span {
+      font-size: clamp(80px, 10vw, 140px);
+      font-weight: 800;
+      color: rgba(180, 195, 220, 0.18);
+      letter-spacing: -0.04em;
+      display: block;
+    }
+
+    /* Right: accordion list */
+    .cf-faq__list {
+      grid-column: 2 / 3;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* Each accordion item */
+    .cf-faq__item {
+      border-bottom: 1px solid var(--cf-border);
+      padding: 22px 0;
+    }
+
+    .cf-faq__item:first-child {
+      border-top: 1px solid var(--cf-border);
+    }
+
+    .cf-faq__trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+    }
+
+    .cf-faq__question {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(14px, 1.4vw, 17px);
+      font-weight: 600;
+      color: var(--cf-text-dark);
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .cf-faq__icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cf-text-dark);
+      transition: transform 0.3s ease, color 0.2s;
+    }
+
+    .cf-faq__icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      transition: transform 0.3s ease;
+    }
+
+    /* Answer panel */
+    .cf-faq__body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.32s ease;
+    }
+
+    .cf-faq__body-inner {
+      overflow: hidden;
+    }
+
+    .cf-faq__answer {
+      padding-top: 12px;
+      font-size: clamp(12px, 1.1vw, 14px);
+      font-weight: 300;
+      color: var(--cf-text-muted);
+      line-height: 1.75;
+    }
+
+    /* Open state */
+    .cf-faq__item.cf-faq__item--open .cf-faq__body {
+      grid-template-rows: 1fr;
+    }
+
+    .cf-faq__item.cf-faq__item--open .cf-faq__icon {
+      color: var(--cf-accent);
+    }
+
+    .cf-faq__item.cf-faq__item--open .cf-faq__trigger .cf-faq__icon svg {
+      transform: rotate(45deg);
+    }
+
+    .cf-faq__item.cf-faq__item--open .cf-faq__question {
+      color: var(--cf-accent);
+    }
+
+    /* ── TABLET (max 1024px) ── */
+    @media (max-width: 1024px) {
+      .cf-cta__card {
+        padding: 40px 36px;
+      }
+
+      .cf-faq {
+        grid-template-columns: 1fr;
+      }
+
+      .cf-faq__watermark {
+        position: relative;
+        top: auto;
+        left: auto;
+        margin-bottom: -20px;
+      }
+
+      .cf-faq__watermark span {
+        font-size: clamp(64px, 14vw, 100px);
+      }
+
+      .cf-faq__list {
+        grid-column: 1 / 2;
+      }
+    }
+
+    /* ── MOBILE (max 640px) ── */
+    @media (max-width: 640px) {
+      .cf-cta {
+        margin-bottom: 48px;
+        padding: 0 16px;
+      }
+
+      .cf-cta__card {
+        padding: 32px 24px;
+        min-height: auto;
+      }
+
+      .cf-faq {
+        padding: 0 16px 60px;
+      }
+
+      .cf-faq__watermark span {
+        font-size: 56px;
+      }
+
+      .cf-faq__item {
+        padding: 18px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ CTA BANNER ══ -->
+  <div class="cf-cta">
+    <div class="cf-cta__card">
+      <div class="cf-cta__inner">
+        <p class="cf-cta__label">Get In Touch</p>
+        <h2 class="cf-cta__heading">Start with a Clear Security Assessment</h2>
+        <p class="cf-cta__desc">Let's discuss how Teceze can deliver for your organization.</p>
+        <a href="https://teal-mule-553916.hostingersite.com/Contactus.php" class="cf-cta__btn">
+          <span class="cf-cta__btn-icon">
+            <svg viewBox="0 0 16 16">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </span>
+          Talk to Our Alliances Team
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ FAQ ══ -->
+  <div class="cf-faq">
+
+    <!-- Watermark -->
+    <div class="cf-faq__watermark" aria-hidden="true">
+      <span>FAQ</span>
+      <span>FAQ</span>
+      <span>FAQ</span>
+    </div>
+
+    <!-- Accordion list -->
+    <ul class="cf-faq__list" role="list">
+
+      <li class="cf-faq__item cf-faq__item--open">
+        <button class="cf-faq__trigger" aria-expanded="true" onclick="cfToggle(this)">
+          <span class="cf-faq__question">What services does Teceze provide?</span>
+          <span class="cf-faq__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </button>
+        <div class="cf-faq__body">
+          <div class="cf-faq__body-inner">
+            <p class="cf-faq__answer">
+              Teceze offers comprehensive IT solutions including Cybersecurity, Managed IT Services, Digital Transformation, and AI-Driven Automation tailored to enterprise needs.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="cf-faq__item">
+        <button class="cf-faq__trigger" aria-expanded="false" onclick="cfToggle(this)">
+          <span class="cf-faq__question">Does Teceze support global enterprises?</span>
+          <span class="cf-faq__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </button>
+        <div class="cf-faq__body">
+          <div class="cf-faq__body-inner">
+            <p class="cf-faq__answer">
+              Yes, Teceze has a global presence and partners with enterprises across multiple continents, providing round-the-clock managed services and strategic IT consulting.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="cf-faq__item">
+        <button class="cf-faq__trigger" aria-expanded="false" onclick="cfToggle(this)">
+          <span class="cf-faq__question">How can I get started with Teceze?</span>
+          <span class="cf-faq__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </button>
+        <div class="cf-faq__body">
+          <div class="cf-faq__body-inner">
+            <p class="cf-faq__answer">
+              Getting started is simple — reach out via our contact page or book a free security assessment. Our alliances team will guide you through onboarding and solution mapping.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="cf-faq__item">
+        <button class="cf-faq__trigger" aria-expanded="false" onclick="cfToggle(this)">
+          <span class="cf-faq__question">Can solutions be customized?</span>
+          <span class="cf-faq__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </button>
+        <div class="cf-faq__body">
+          <div class="cf-faq__body-inner">
+            <p class="cf-faq__answer">
+              Absolutely. Every engagement is tailored to your organization's unique infrastructure, compliance requirements, and business objectives. No cookie-cutter solutions.
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li class="cf-faq__item">
+        <button class="cf-faq__trigger" aria-expanded="false" onclick="cfToggle(this)">
+          <span class="cf-faq__question">Do you provide real-time security monitoring?</span>
+          <span class="cf-faq__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+        </button>
+        <div class="cf-faq__body">
+          <div class="cf-faq__body-inner">
+            <p class="cf-faq__answer">
+              Yes. Our 24/7 Security Operations Centre (SOC) delivers real-time threat detection, incident response, and continuous monitoring across your entire environment.
+            </p>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <script>
+    function cfToggle(btn) {
+      const item = btn.closest('.cf-faq__item');
+      const isOpen = item.classList.contains('cf-faq__item--open');
+
+      // Close all
+      document.querySelectorAll('.cf-faq__item').forEach(el => {
+        el.classList.remove('cf-faq__item--open');
+        el.querySelector('.cf-faq__trigger').setAttribute('aria-expanded', 'false');
+      });
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('cf-faq__item--open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+  </script>
+
+<!-- ===== SECTION 3: CONTACT FORM ===== -->
+<section class="ct-form-section" id="contact-form">
+  <div class="ct-form-wrapper">
+ 
+    <!-- Left Panel -->
+    <div class="ct-form-left">
+      <div class="ct-form-left-overlay"></div>
+      <div class="ct-form-left-content">
+        <p class="ct-form-tag">Get In Touch</p>
+        <h2 class="ct-form-left-title">Tell Us About Your Requirements and We'll Take It from There</h2>
+        <p class="ct-form-left-sub">Share your details and project needs, and our team will connect with you to provide the right solutions and next steps.</p>
+      </div>
+    </div>
+ 
+    <!-- Right Panel - Form -->
+    <div class="ct-form-right">
+     <iframe 
+      aria-label="Contact us now"
+      frameborder="0"
+      style="height:600px;width:100%;border:none;"
+      src="https://forms.zohopublic.com/FormsWorking/form/Contactusnow/formperma/xf8H-0yPN2b0htwf3avvn98bxsgNYtPywaYfdgwYQgU">
+    </iframe>
+    </div>
+  </div>
+ 
+   
+</section>
+
+ 
+<style>
+.ct-form-section {
+  background: #ffffff;
+  width: 100%;
+  padding: 60px 40px 80px;
+}
+ 
+.ct-form-wrapper {
+  display: flex;
+  gap: 50px;
+  max-width: 1100px;
+  margin: 0 auto 60px;
+  align-items: stretch;
+}
+ 
+/* Left Panel */
+.ct-form-left {
+  position: relative;
+  width: 380px;
+  min-width: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-image: url('images/contact-left-img.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 420px;
+  flex-shrink: 0;
+}
+ 
+.ct-form-left-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(10, 20, 60, 0.55), rgba(10, 20, 80, 0.85));
+  z-index: 1;
+}
+ 
+.ct-form-left-content {
+  position: relative;
+  z-index: 2;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+ 
+.ct-form-tag {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.75);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+ 
+.ct-form-left-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+ 
+.ct-form-left-sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.65;
+}
+ 
+/* Right Panel */
+.ct-form-right {
+  flex: 1;
+  min-width: 0;
+}
+ 
+.ct-form-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f1f3d;
+  margin-bottom: 6px;
+}
+ 
+.ct-form-subtitle {
+  font-size: 13px;
+  color: #8a94a6;
+  margin-bottom: 28px;
+}
+ 
+.ct-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+ 
+.ct-form-row {
+  display: flex;
+  gap: 16px;
+}
+ 
+.ct-form-row .ct-form-group {
+  flex: 1;
+}
+ 
+.ct-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.ct-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #0f1f3d;
+}
+ 
+.ct-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #dde1ea;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #0f1f3d;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background: #ffffff;
+}
+ 
+.ct-input:focus {
+  border-color: #2A44B0;
+}
+ 
+.ct-input::placeholder {
+  color: #b0b7c3;
+}
+ 
+/* Phone Input */
+.ct-phone-wrap {
+  display: flex;
+  border: 1px solid #dde1ea;
+  border-radius: 6px;
+  overflow: hidden;
+}
+ 
+.ct-phone-flag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 12px;
+  background: #f7f8fb;
+  border-right: 1px solid #dde1ea;
+  font-size: 13px;
+  color: #0f1f3d;
+  cursor: pointer;
+  white-space: nowrap;
+}
+ 
+.ct-flag-img {
+  width: 20px;
+  height: auto;
+  border-radius: 2px;
+}
+ 
+.ct-phone-input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+}
+ 
+.ct-phone-input:focus {
+  border-color: transparent;
+  box-shadow: none;
+}
+ 
+/* Select */
+.ct-select-wrap {
+  position: relative;
+}
+ 
+.ct-select {
+  width: 100%;
+  padding: 11px 40px 11px 14px;
+  border: 1px solid #dde1ea;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #0f1f3d;
+  background: #ffffff;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+ 
+.ct-select:focus {
+  border-color: #2A44B0;
+}
+ 
+.ct-select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #8a94a6;
+}
+ 
+/* Textarea */
+.ct-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #dde1ea;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #0f1f3d;
+  resize: vertical;
+  min-height: 110px;
+  outline: none;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  transition: border-color 0.3s ease;
+}
+ 
+.ct-textarea:focus {
+  border-color: #2A44B0;
+}
+ 
+.ct-textarea::placeholder {
+  color: #b0b7c3;
+}
+ 
+/* Submit Button */
+.ct-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 24px 10px 10px;
+  border: 1.5px solid #2A44B0;
+  border-radius: 50px;
+  background: transparent;
+  color: #0f1f3d;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: fit-content;
+}
+ 
+.ct-submit-btn:hover {
+  background: rgba(42, 68, 176, 0.06);
+}
+ 
+.ct-submit-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #13C5B8, #2A44B0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+ 
+/* Bottom Text */
+.ct-form-bottom {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 40px;
+  border-top: 1px solid #edf0f5;
+}
+ 
+.ct-powered-label {
+  font-size: 12px;
+  color: #8a94a6;
+  line-height: 1.6;
+  min-width: 140px;
+}
+ 
+.ct-bottom-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f1f3d;
+  line-height: 1.5;
+}
+ 
+.ct-bottom-highlight {
+  color: #8a94a6;
+  font-weight: 400;
+}
+
+</style>
+
+</body>
+<?php include 'footer.php'; ?>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Teceze Footer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-deep: #05112a;
+      --navy-mid: #071a3e;
+      --blue-accent: #1a4080;
+      --blue-light: #2a5fad;
+      --text-white: #ffffff;
+      --text-muted: #8aabd4;
+      --grid-line: rgba(255,255,255,0.06);
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--navy-deep);
+    }
+
+    /* ── FOOTER WRAPPER ── */
+    .footer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: var(--navy-mid);
+    }
+
+    /* ── BACKGROUND IMAGE ── */
+    .footer__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    /* ── GRID OVERLAY ── */
+    .footer__grid-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* ── LET'S TALK HERO ── */
+    .footer__hero {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 40px 0 10px 0;
+      overflow: hidden;
+    }
+
+    .footer__lets-talk-img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+      object-position: left center;
+      /* Fallback if image missing */
+      min-height: 120px;
+    }
+
+    /* ── CONTAINER 1: MAIN FOOTER CONTENT ── */
+    .footer__main {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 50px 40px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* Logo + Desc Column */
+    .footer__brand {
+      grid-column: span 2;
+    }
+
+    .footer__logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .footer__logo-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .footer__logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .footer__logo-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 3px;
+      color: var(--text-white);
+      line-height: 1;
+    }
+
+    .footer__logo-tagline {
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .footer__desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 260px;
+      margin-bottom: 28px;
+    }
+
+    /* Social Icons */
+    .footer__socials {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer__social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .footer__social-link:hover {
+      background: var(--blue-light);
+      border-color: var(--blue-light);
+    }
+
+    /* Nav Columns */
+    .footer__nav-col h4 {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--text-white);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .footer__nav-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer__nav-col ul li a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer__nav-col ul li a:hover {
+      color: var(--text-white);
+    }
+
+    /* ── DIVIDER ── */
+    .footer__divider {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── CONTAINER 2: BOTTOM BAR ── */
+    .footer__bottom {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer__copyright {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .footer__legal-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer__legal-links a {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .footer__legal-links a:hover {
+      color: var(--text-white);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .footer__main {
+        grid-template-columns: 1fr 1fr;
+        padding: 40px 28px 30px;
+        gap: 32px;
+      }
+
+      .footer__brand {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .footer__main {
+        grid-template-columns: 1fr;
+        padding: 32px 20px 24px;
+        gap: 28px;
+      }
+
+      .footer__brand {
+        grid-column: span 1;
+      }
+
+      .footer__bottom {
+        padding: 16px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer__legal-links {
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<footer class="footer">
+
+  <!-- BACKGROUND IMAGE — replace src with your actual background image -->
+  <img
+    class="footer__bg"
+    src="/images/Ai-tools-bg-img.jpg"
+    alt=""
+    aria-hidden="true"
+  />
+
+  <!-- GRID OVERLAY -->
+  <div class="footer__grid-overlay"></div>
+
+  <!-- LET'S TALK TEXT AS IMAGE — replace src with your actual "Let's Talk" image -->
+  <div class="footer__hero">
+    <img
+      class="footer__lets-talk-img"
+      src="/images/Let’s Talk.png"
+      alt="Let's Talk"
+    />
+  </div>
+
+  <!-- CONTAINER 1: MAIN FOOTER CONTENT -->
+  <div class="footer__main">
+
+    <!-- Brand Column -->
+    <div class="footer__brand">
+      <div class="footer__logo-wrap">
+        <!-- Logo SVG icon -->
+        <svg class="footer__logo-icon" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="21" stroke="#2a5fad" stroke-width="1.5"/>
+          <path d="M22 8 C14 8 8 14 8 22 C8 30 14 36 22 36" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M22 36 C30 36 36 30 36 22 C36 14 30 8 22 8" stroke="#2a5fad" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <circle cx="22" cy="22" r="5" fill="#2a5fad"/>
+          <path d="M12 22 H32" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <div class="footer__logo-text">
+          <span class="footer__logo-name">TECEZE</span>
+          <span class="footer__logo-tagline">Digital Innovation &amp; Excellence</span>
+        </div>
+      </div>
+      <p class="footer__desc">
+        Teceze leverages AI, intelligent automation, and advanced cybersecurity to help businesses innovate, stay secure, and scale with confidence.
+      </p>
+      <div class="footer__socials">
+        <a href="#" class="footer__social-link" aria-label="Facebook">f</a>
+        <a href="#" class="footer__social-link" aria-label="X / Twitter">𝕏</a>
+        <a href="#" class="footer__social-link" aria-label="Instagram">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="#" class="footer__social-link" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+
+    <!-- Services Column -->
+    <div class="footer__nav-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Web Development</a></li>
+        <li><a href="#">Mobile Development</a></li>
+        <li><a href="#">Machine Learning</a></li>
+        <li><a href="#">QA Testing</a></li>
+      </ul>
+    </div>
+
+    <!-- Company Column -->
+    <div class="footer__nav-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Case Study</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Insights</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="footer__divider"></div>
+
+  <!-- CONTAINER 2: BOTTOM BAR -->
+  <div class="footer__bottom">
+    <span class="footer__copyright">© 2026 Made with Teceze Limited. All rights reserved.</span>
+    <nav class="footer__legal-links">
+      <a href="#">Accessibility</a>
+      <a href="#">Cookie</a>
+      <a href="#">Legal &amp; Privacy</a>
+    </nav>
+  </div>
+
+</footer>
+
+</body>
+</html>
