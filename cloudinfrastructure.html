@@ -1006,20 +1006,22 @@ document.addEventListener("click", e => {
     .ci-offer-page-num {
       display: flex;
       align-items: baseline;
-      gap: 4px;
+      gap: 3px;
     }
 
     .ci-offer-page-current {
-      font-size: 40px;
+      font-size: clamp(32px, 5vw, 52px);
       font-weight: 800;
-      color: #2A44B0;
+      background: linear-gradient(135deg, #1a56db, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       line-height: 1;
     }
 
-    .ci-offer-page-total {
-      font-size: 16px;
-      font-weight: 500;
-      color: #8a94a6;
+    .ci-offer-page-sep, .ci-offer-page-total {
+      font-size: clamp(14px, 1.8vw, 20px);
+      font-weight: 400;
+      color: #b0b7c3;
     }
 
     .ci-offer-page-arrows {
@@ -1359,10 +1361,6 @@ document.addEventListener("click", e => {
         letter-spacing: -2px;
       }
 
-      .ci-offer-page-current {
-        font-size: 32px;
-      }
-
       .ci-card-image-panel {
         right: auto;
         left: 10px;
@@ -1393,10 +1391,6 @@ document.addEventListener("click", e => {
       .ci-offer-watermark span {
         font-size: 18vw;
         letter-spacing: -1px;
-      }
-
-      .ci-offer-page-current {
-        font-size: 28px;
       }
 
       .ci-offer-arrow {
@@ -1764,7 +1758,8 @@ document.addEventListener("click", e => {
   <div class="ci-offer-pagination">
     <div class="ci-offer-page-num">
       <span class="ci-offer-page-current">01</span>
-      <span class="ci-offer-page-total">/05</span>
+      <span class="ci-offer-page-sep">&thinsp;/</span>
+      <span class="ci-offer-page-total">05</span>
     </div>
     <div class="ci-offer-page-arrows">
       <button class="ci-offer-arrow" aria-label="Previous" id="prevBtn">
@@ -1886,6 +1881,8 @@ window.onload = function () {
   const cards = document.querySelectorAll(".ci-offer-card");
   const nextBtn = document.getElementById("nextBtn");
   const prevBtn = document.getElementById("prevBtn");
+  const curPage = document.querySelector(".ci-offer-page-current");
+  const totPage = document.querySelector(".ci-offer-page-total");
 
   if (!track || cards.length === 0) {
     console.log("Slider elements not found ❌");
@@ -1893,27 +1890,72 @@ window.onload = function () {
   }
 
   let index = 0;
-  const visible = 3;
   const gap = 16;
+  let autoSlideInterval;
 
   function update() {
     const cardWidth = cards[0].offsetWidth + gap;
+    // Calculate how many cards are visible
+    let visible = Math.round(track.parentElement.offsetWidth / cardWidth);
+    if (visible < 1) visible = 1;
+    
+    let maxIndex = cards.length - visible;
+    if (maxIndex < 0) maxIndex = 0;
+
+    if (index > maxIndex) index = maxIndex;
+    if (index < 0) index = 0;
+
     track.style.transform = `translateX(-${index * cardWidth}px)`;
+    
+    if (curPage) curPage.textContent = String(index + 1).padStart(2, '0');
+    if (totPage) totPage.textContent = String(maxIndex + 1).padStart(2, '0');
   }
 
-  nextBtn.onclick = function () {
-    if (index < cards.length - visible) {
+  function nextSlide() {
+    const cardWidth = cards[0].offsetWidth + gap;
+    let visible = Math.round(track.parentElement.offsetWidth / cardWidth);
+    if (visible < 1) visible = 1;
+    let maxIndex = cards.length - visible;
+    
+    if (index < maxIndex) {
       index++;
-      update();
+    } else {
+      index = 0; // loop back to first slide
     }
-  };
+    update();
+  }
 
-  prevBtn.onclick = function () {
+  function prevSlide() {
     if (index > 0) {
       index--;
       update();
     }
-  };
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    autoSlideInterval = setInterval(nextSlide, 5000);
+  }
+
+  if (nextBtn) {
+    nextBtn.onclick = function () {
+      nextSlide();
+      resetAutoSlide();
+    };
+  }
+
+  if (prevBtn) {
+    prevBtn.onclick = function () {
+      prevSlide();
+      resetAutoSlide();
+    };
+  }
+
+  window.addEventListener('resize', update);
+  
+  // Initialize slider
+  update();
+  resetAutoSlide();
 
 };
 </script>
