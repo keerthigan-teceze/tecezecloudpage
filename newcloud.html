@@ -651,85 +651,100 @@
 
     /* ===== CARDS GRID ===== */
     .ci-offer-grid {
-  display: flex;
-  gap: 16px;
-  overflow: hidden; /* hide extra cards */
-}
-
-.ci-offer-track {
-  display: flex;
-  gap: 16px;
-  transition: transform 0.5s ease; /* 🔥 smooth animation */
-}
-
-/* each card stays 3 per row */
-.ci-offer-card {
-  flex: 0 0 calc((100% - 32px) / 3); /* ✅ 3 cards with gap */
-}
-
-
-    /* ===== CARD ===== */
-    .ci-offer-card {
-      position: relative;
-      border-radius: 16px;
+      display: flex;
+      gap: 0;
       overflow: hidden;
-      min-height: 320px;
-      cursor: pointer;
+      border-radius: 24px;
     }
 
-    /* ===== CARD BG IMAGE ===== */
+    .ci-offer-track {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      will-change: transform;
+    }
+
+    /* ===== CARD — base ===== */
+    .ci-offer-card {
+      position: relative;
+      flex: 0 0 calc(100% / 3);
+      height: 460px;
+      cursor: pointer;
+      overflow: hidden;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+
+    /* inner wrapper — the rounded card itself */
+    .ci-offer-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 2rem;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+    }
+
+    /* ===== IMAGE STATE (default) ===== */
     .ci-offer-card-bg {
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      transition: transform 0.5s ease;
+      background-color: #1a2a5e;
       z-index: 0;
-      background-color: #1a2a5e; /* fallback color when no image */
+      transition: transform 0.7s ease, opacity 0.5s ease;
     }
 
-    .ci-offer-card:hover .ci-offer-card-bg {
-      transform: scale(1.05);
+    .ci-offer-card-inner:hover .ci-offer-card-bg,
+    .ci-offer-card-inner.active .ci-offer-card-bg {
+      transform: scale(1.08);
     }
 
-    /* ===== OVERLAY — always visible, darkens on hover ===== */
+    /* dark gradient overlay on image */
     .ci-offer-card-overlay {
       position: absolute;
       inset: 0;
       background: linear-gradient(
-        to bottom,
-        rgba(10, 30, 80, 0.25) 0%,
-        rgba(10, 30, 80, 0.65) 100%
+        to top,
+        rgba(0,0,0,0.85) 0%,
+        rgba(0,0,0,0.25) 55%,
+        transparent 100%
       );
       z-index: 1;
-      transition: background 0.4s ease;
+      transition: opacity 0.5s ease;
     }
 
-    .ci-offer-card:hover .ci-offer-card-overlay {
-      background: linear-gradient(
-        to bottom,
-        rgba(10, 180, 200, 0.35) 0%,
-        rgba(10, 30, 90, 0.88) 100%
-      );
+    .ci-offer-card-inner:hover .ci-offer-card-overlay,
+    .ci-offer-card-inner.active .ci-offer-card-overlay {
+      opacity: 0;
     }
 
-    /* ===== CARD CONTENT ===== */
+    /* ===== IMAGE-STATE CONTENT (bottom of image card) ===== */
     .ci-offer-card-content {
-      position: relative;
+      position: absolute;
+      inset: 0;
       z-index: 2;
-      padding: 28px 24px;
-      height: 100%;
+      padding: 28px 26px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
+      transition: opacity 0.45s ease;
     }
 
-    /* Top */
+    .ci-offer-card-inner:hover .ci-offer-card-content,
+    .ci-offer-card-inner.active .ci-offer-card-content {
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .ci-offer-card-top {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
+      margin-bottom: 0;
     }
 
     .ci-offer-card-icon {
@@ -738,6 +753,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 8px;
     }
 
     .ci-offer-card-icon svg {
@@ -752,28 +768,93 @@
 
     .ci-offer-card-category {
       font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+      font-weight: 700;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
+      color: rgba(255, 255, 255, 0.85);
     }
 
     .ci-offer-card-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
       line-height: 1.25;
       color: #ffffff;
     }
 
-    /* Bottom */
     .ci-offer-card-bottom {
-      margin-top: 60px;
+      display: none; /* hidden — description shown in hover layer */
     }
 
-    .ci-offer-card-desc {
-      font-size: 13px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.80);
+    /* ===== HOVER GLASS CARD (teal gradient) ===== */
+    .ci-offer-card-hover {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      padding: 28px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(160deg, #01516c 0%, #126d81 50%, #0f4a5c 100%);
+      border-radius: 2rem;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+    }
+
+    .ci-offer-card-inner:hover .ci-offer-card-hover,
+    .ci-offer-card-inner.active .ci-offer-card-hover {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* hover layer — icon */
+    .ci-offer-card-hover-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .ci-offer-card-hover-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: #13C5B8;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* hover layer — top group */
+    .ci-offer-card-hover-top {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ci-offer-card-hover-cat {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #5eead4;
+    }
+
+    .ci-offer-card-hover-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #ffffff;
+    }
+
+    /* hover layer — description */
+    .ci-offer-card-hover-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.88);
+      margin-top: 16px;
     }
 
     /* ===== PAGINATION ROW ===== */
@@ -814,8 +895,8 @@
     }
 
     .ci-offer-arrow {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       border: 1.5px solid #dde1ea;
       background: #ffffff;
@@ -827,8 +908,8 @@
     }
 
     .ci-offer-arrow:hover {
-      background: #2A44B0;
-      border-color: #2A44B0;
+      background: #01516c;
+      border-color: #01516c;
     }
 
     .ci-offer-arrow:hover svg {
@@ -1101,25 +1182,22 @@
     ================================================ */
     @media (max-width: 1024px) {
       .ci-offer {
-        padding: 50px 40px 60px;
-      }
-
-      .ci-offer-grid {
-        gap: 12px;
-        margin-top: 70px;
+        padding: 50px 30px 60px;
       }
 
       .ci-offer-card {
-        min-height: 350px;
-        flex: 0 0 calc((100% - 12px) / 2);
+        flex: 0 0 50%;
+        height: 420px;
+        padding: 0 8px;
       }
 
-      .ci-offer-card-bottom {
-        margin-top: 30px;
+      .ci-offer-card-title,
+      .ci-offer-card-hover-title {
+        font-size: 18px;
       }
 
-      .ci-offer-card-title {
-        font-size: 19px;
+      .ci-offer-card-hover-desc {
+        font-size: 13px;
       }
     }
 
@@ -1128,24 +1206,17 @@
     ================================================ */
     @media (max-width: 768px) {
       .ci-offer {
-        padding: 40px 24px 50px;
-      }
-
-      .ci-offer-grid {
-        gap: 14px;
-        margin-top: 60px;
+        padding: 40px 20px 50px;
       }
 
       .ci-offer-card {
-        min-height: 320px;
         flex: 0 0 100%;
+        height: 420px;
+        padding: 0 6px;
       }
 
-      .ci-offer-card-bottom {
-        margin-top: 30px;
-      }
-
-      .ci-offer-card-title {
+      .ci-offer-card-title,
+      .ci-offer-card-hover-title {
         font-size: 20px;
       }
 
@@ -1166,19 +1237,17 @@
     ================================================ */
     @media (max-width: 480px) {
       .ci-offer {
-        padding: 30px 16px 40px;
+        padding: 30px 14px 40px;
       }
 
       .ci-offer-card {
-        min-height: 300px;
+        height: 400px;
+        padding: 0 4px;
       }
 
-      .ci-offer-card-title {
-        font-size: 18px;
-      }
-
-      .ci-offer-card-content {
-        padding: 22px 18px;
+      .ci-offer-card-content,
+      .ci-offer-card-hover {
+        padding: 22px 20px;
       }
 
       .ci-offer-watermark span {
@@ -1187,8 +1256,8 @@
       }
 
       .ci-offer-arrow {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
       }
     }
 
@@ -3344,9 +3413,10 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
 
     <!-- Card 1 -->
     <div class="ci-offer-card" data-card="0">
-      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-1.png');"></div>
-      <div class="ci-offer-card-overlay"></div>
-      <div class="ci-offer-card-content">
+      <div class="ci-offer-card-inner">
+        <div class="ci-offer-card-bg" style="background-image: url('images/card-img-1.png');"></div>
+        <div class="ci-offer-card-overlay"></div>
+        <div class="ci-offer-card-content">
         <div class="ci-offer-card-top">
           <div class="ci-offer-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -3363,53 +3433,33 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
           <p class="ci-offer-card-desc">Structured cloud frameworks aligned to business requirements, enabling efficient deployment, scalability, and long-term performance.</p>
         </div>
       </div>
-
-      <!-- Edit button -->
-      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-      </button>
-
-      <!-- Image panel -->
-      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
-        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
-          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
-        </button>
-        <p class="ci-panel-title">Background Image</p>
-
-        <!-- URL input -->
-        <div class="ci-panel-url-row">
-          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
-          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        
+        <div class="ci-offer-card-hover">
+          <div class="ci-offer-card-hover-top">
+            <div class="ci-offer-card-hover-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+              <line x1="12" y1="12" x2="12" y2="16"/>
+              <line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+            </div>
+            <p class="ci-offer-card-hover-cat">Architecture</p>
+            <h3 class="ci-offer-card-hover-title">Cloud Strategy &amp;<br>Architecture Design</h3>
+          </div>
+          <p class="ci-offer-card-hover-desc">Structured cloud frameworks aligned to business requirements, enabling efficient deployment, scalability, and long-term performance.</p>
         </div>
-
-        <div class="ci-panel-divider">or</div>
-
-        <!-- File upload -->
-        <label class="ci-panel-upload-label">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload from device
-          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
-        </label>
-
-        <!-- Preview -->
-        <div class="ci-panel-preview">
-          <span class="ci-panel-preview-label">Preview</span>
-        </div>
-
-        <!-- Clear -->
-        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
       </div>
+
+      
     </div>
 
     <!-- Card 2 -->
     <div class="ci-offer-card" data-card="1">
-      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-3.png');"></div>
-      <div class="ci-offer-card-overlay"></div>
-      <div class="ci-offer-card-content">
+      <div class="ci-offer-card-inner">
+        <div class="ci-offer-card-bg" style="background-image: url('images/card-img-3.png');"></div>
+        <div class="ci-offer-card-overlay"></div>
+        <div class="ci-offer-card-content">
         <div class="ci-offer-card-top">
           <div class="ci-offer-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -3426,42 +3476,33 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
           <p class="ci-offer-card-desc">Seamless transition of applications, data, and workloads to cloud environments with minimal disruption and optimized performance.</p>
         </div>
       </div>
-
-      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-      </button>
-
-      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
-        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
-          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
-        </button>
-        <p class="ci-panel-title">Background Image</p>
-        <div class="ci-panel-url-row">
-          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
-          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        
+        <div class="ci-offer-card-hover">
+          <div class="ci-offer-card-hover-top">
+            <div class="ci-offer-card-hover-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            </div>
+            <p class="ci-offer-card-hover-cat">Migration</p>
+            <h3 class="ci-offer-card-hover-title">Cloud Migration & Modernization</h3>
+          </div>
+          <p class="ci-offer-card-hover-desc">Seamless transition of applications, data, and workloads to cloud environments with minimal disruption and optimized performance.</p>
         </div>
-        <div class="ci-panel-divider">or</div>
-        <label class="ci-panel-upload-label">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload from device
-          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
-        </label>
-        <div class="ci-panel-preview">
-          <span class="ci-panel-preview-label">Preview</span>
-        </div>
-        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
       </div>
+
+      
     </div>
 
     <!-- Card 3 -->
     <div class="ci-offer-card" data-card="2">
-      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-2.png');"></div>
-      <div class="ci-offer-card-overlay"></div>
-      <div class="ci-offer-card-content">
+      <div class="ci-offer-card-inner">
+        <div class="ci-offer-card-bg" style="background-image: url('images/card-img-2.png');"></div>
+        <div class="ci-offer-card-overlay"></div>
+        <div class="ci-offer-card-content">
         <div class="ci-offer-card-top">
           <div class="ci-offer-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -3475,42 +3516,30 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
           <p class="ci-offer-card-desc">Continuous management of cloud environments ensures availability, cost optimization, and performance consistency.</p>
         </div>
       </div>
-
-      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-      </button>
-
-      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
-        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
-          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
-        </button>
-        <p class="ci-panel-title">Background Image</p>
-        <div class="ci-panel-url-row">
-          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
-          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        
+        <div class="ci-offer-card-hover">
+          <div class="ci-offer-card-hover-top">
+            <div class="ci-offer-card-hover-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+            </div>
+            <p class="ci-offer-card-hover-cat">Management</p>
+            <h3 class="ci-offer-card-hover-title">Cloud Operations  &amp; Management</h3>
+          </div>
+          <p class="ci-offer-card-hover-desc">Continuous management of cloud environments ensures availability, cost optimization, and performance consistency.</p>
         </div>
-        <div class="ci-panel-divider">or</div>
-        <label class="ci-panel-upload-label">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload from device
-          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
-        </label>
-        <div class="ci-panel-preview">
-          <span class="ci-panel-preview-label">Preview</span>
-        </div>
-        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
       </div>
+
+      
     </div>
 
         <!-- Card 4 -->
     <div class="ci-offer-card" data-card="1">
-      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-1.png');"></div>
-      <div class="ci-offer-card-overlay"></div>
-      <div class="ci-offer-card-content">
+      <div class="ci-offer-card-inner">
+        <div class="ci-offer-card-bg" style="background-image: url('images/card-img-1.png');"></div>
+        <div class="ci-offer-card-overlay"></div>
+        <div class="ci-offer-card-content">
         <div class="ci-offer-card-top">
           <div class="ci-offer-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -3527,43 +3556,34 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
           <p class="ci-offer-card-desc">Flexible cloud models integrating public, private, and hybrid environments to support diverse workloads and business needs.</p>
         </div>
       </div>
-
-      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-      </button>
-
-      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
-        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
-          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
-        </button>
-        <p class="ci-panel-title">Background Image</p>
-        <div class="ci-panel-url-row">
-          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
-          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        
+        <div class="ci-offer-card-hover">
+          <div class="ci-offer-card-hover-top">
+            <div class="ci-offer-card-hover-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            </div>
+            <p class="ci-offer-card-hover-cat">Platform</p>
+            <h3 class="ci-offer-card-hover-title">Hybrid & Multi-Cloud Enablement</h3>
+          </div>
+          <p class="ci-offer-card-hover-desc">Flexible cloud models integrating public, private, and hybrid environments to support diverse workloads and business needs.</p>
         </div>
-        <div class="ci-panel-divider">or</div>
-        <label class="ci-panel-upload-label">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload from device
-          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
-        </label>
-        <div class="ci-panel-preview">
-          <span class="ci-panel-preview-label">Preview</span>
-        </div>
-        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
       </div>
+
+      
     </div>
 
 
         <!-- Card 5 -->
     <div class="ci-offer-card" data-card="1">
-      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-3.png');"></div>
-      <div class="ci-offer-card-overlay"></div>
-      <div class="ci-offer-card-content">
+      <div class="ci-offer-card-inner">
+        <div class="ci-offer-card-bg" style="background-image: url('images/card-img-3.png');"></div>
+        <div class="ci-offer-card-overlay"></div>
+        <div class="ci-offer-card-content">
         <div class="ci-offer-card-top">
           <div class="ci-offer-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -3580,44 +3600,35 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
           <p class="ci-offer-card-desc">Integrated security controls, access management, and compliance frameworks to protect data and infrastructure across environments.</p>
         </div>
       </div>
-
-      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-      </button>
-
-      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
-        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
-          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
-        </button>
-        <p class="ci-panel-title">Background Image</p>
-        <div class="ci-panel-url-row">
-          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
-          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        
+        <div class="ci-offer-card-hover">
+          <div class="ci-offer-card-hover-top">
+            <div class="ci-offer-card-hover-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            </div>
+            <p class="ci-offer-card-hover-cat">Security</p>
+            <h3 class="ci-offer-card-hover-title">Cloud Security & Governance</h3>
+          </div>
+          <p class="ci-offer-card-hover-desc">Integrated security controls, access management, and compliance frameworks to protect data and infrastructure across environments.</p>
         </div>
-        <div class="ci-panel-divider">or</div>
-        <label class="ci-panel-upload-label">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload from device
-          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
-        </label>
-        <div class="ci-panel-preview">
-          <span class="ci-panel-preview-label">Preview</span>
-        </div>
-        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
       </div>
+
+      
     </div>
 
 
 
         <!-- Card 6 -->
     <div class="ci-offer-card" data-card="1">
-      <div class="ci-offer-card-bg" style="background-image: url('images/card-img-2.png');"></div>
-      <div class="ci-offer-card-overlay"></div>
-      <div class="ci-offer-card-content">
+      <div class="ci-offer-card-inner">
+        <div class="ci-offer-card-bg" style="background-image: url('images/card-img-2.png');"></div>
+        <div class="ci-offer-card-overlay"></div>
+        <div class="ci-offer-card-content">
         <div class="ci-offer-card-top">
           <div class="ci-offer-card-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -3634,35 +3645,25 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
           <p class="ci-offer-card-desc">Resource monitoring and optimization strategies that improve efficiency, reduce waste, and enhance overall system performance.</p>
         </div>
       </div>
-
-      <button class="ci-card-edit-btn" aria-label="Set background image" onclick="togglePanel(this, event)">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
-        </svg>
-      </button>
-
-      <div class="ci-card-image-panel" role="dialog" aria-label="Set card background image">
-        <button class="ci-panel-close" onclick="closePanel(this, event)" aria-label="Close">
-          <svg viewBox="0 0 12 12"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
-        </button>
-        <p class="ci-panel-title">Background Image</p>
-        <div class="ci-panel-url-row">
-          <input type="url" class="ci-panel-url-input" placeholder="Paste image URL…" aria-label="Image URL"/>
-          <button class="ci-panel-apply-btn" onclick="applyUrl(this)">Apply</button>
+        
+        <div class="ci-offer-card-hover">
+          <div class="ci-offer-card-hover-top">
+            <div class="ci-offer-card-hover-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+            </div>
+            <p class="ci-offer-card-hover-cat">Optimization</p>
+            <h3 class="ci-offer-card-hover-title">Cost & Performance Optimization</h3>
+          </div>
+          <p class="ci-offer-card-hover-desc">Resource monitoring and optimization strategies that improve efficiency, reduce waste, and enhance overall system performance.</p>
         </div>
-        <div class="ci-panel-divider">or</div>
-        <label class="ci-panel-upload-label">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          Upload from device
-          <input type="file" class="ci-panel-file-input" accept="image/*" onchange="applyFile(this)"/>
-        </label>
-        <div class="ci-panel-preview">
-          <span class="ci-panel-preview-label">Preview</span>
-        </div>
-        <button class="ci-panel-clear-btn" onclick="clearImage(this)">✕ Remove image</button>
       </div>
+
+      
     </div>
 </div>
   </div>
@@ -4340,14 +4341,21 @@ window.onload = function () {
   }
 
   let index = 0;
-  const gap = 16;
   let autoSlideInterval;
 
   function update() {
-    const cardWidth = cards[0].offsetWidth + gap;
-    // Calculate how many cards are visible
-    let visible = Math.round(track.parentElement.offsetWidth / cardWidth);
-    if (visible < 1) visible = 1;
+    const isMobile = window.innerWidth <= 768;
+    const isTab = window.innerWidth <= 1024;
+    
+    let visible = 3;
+    let stepSize = 33.33333;
+    if (isMobile) {
+      visible = 1;
+      stepSize = 100;
+    } else if (isTab) {
+      visible = 2;
+      stepSize = 50;
+    }
     
     let maxIndex = cards.length - visible;
     if (maxIndex < 0) maxIndex = 0;
@@ -4355,16 +4363,16 @@ window.onload = function () {
     if (index > maxIndex) index = maxIndex;
     if (index < 0) index = 0;
 
-    track.style.transform = `translateX(-${index * cardWidth}px)`;
+    track.style.transform = `translateX(-${index * stepSize}%)`;
     
     if (curPage) curPage.textContent = String(index + 1).padStart(2, '0');
     if (totPage) totPage.textContent = String(maxIndex + 1).padStart(2, '0');
   }
 
   function nextSlide() {
-    const cardWidth = cards[0].offsetWidth + gap;
-    let visible = Math.round(track.parentElement.offsetWidth / cardWidth);
-    if (visible < 1) visible = 1;
+    const isMobile = window.innerWidth <= 768;
+    const isTab = window.innerWidth <= 1024;
+    let visible = isMobile ? 1 : (isTab ? 2 : 3);
     let maxIndex = cards.length - visible;
     
     if (index < maxIndex) {
@@ -4401,11 +4409,32 @@ window.onload = function () {
     };
   }
 
-  window.addEventListener('resize', update);
+  window.addEventListener('resize', () => {
+    update();
+  });
   
   // Initialize slider
   update();
   resetAutoSlide();
+
+  // Pause on hover
+  const offerSection = document.querySelector(".ci-offer");
+  if (offerSection) {
+    offerSection.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
+    offerSection.addEventListener("mouseleave", () => resetAutoSlide());
+  }
+
+  // Touch support for cards
+  const cardsInner = document.querySelectorAll('.ci-offer-card-inner');
+  cardsInner.forEach(card => {
+    card.addEventListener('click', (e) => {
+      const isActive = card.classList.contains('active');
+      cardsInner.forEach(c => c.classList.remove('active'));
+      if (!isActive) {
+        card.classList.add('active');
+      }
+    });
+  });
 
 };
 </script>
