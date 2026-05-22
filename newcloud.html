@@ -132,9 +132,9 @@
     border: 1px solid rgba(255,255,255,0.16);
     border-radius: 7px;
     padding: 8px 11px;
-    font-size: 12.5px;
+    font-size: 13px;
     font-family: inherit;
-    color: #fff;
+    color: #ffffff;
     outline: none;
   }
 
@@ -149,109 +149,106 @@
 
   .ci-field textarea { resize: none; height: 68px; line-height: 1.5; }
 
-  /* PHONE ROW */
-  .ci-phone-row { display: flex; gap: 7px; position: relative; }
+/* ===== INTL TEL INPUT ===== */
 
-  .ci-flag-btn {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 0 9px;
-    height: 34px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 7px;
-    color: #fff;
-    font-size: 12.5px;
-    font-family: inherit;
-    cursor: pointer;
-    white-space: nowrap;
-    user-select: none;
-  }
+.iti {
+  width: 100%;
+}
 
-  .ci-flag-btn .flag-emoji { font-size: 15px; line-height: 1; }
-  .ci-flag-btn .dial-code { font-size: 12px; font-weight: 500; }
+.iti--separate-dial-code {
+  width: 100%;
+}
 
-  .ci-flag-btn .chev {
-    width: 0; height: 0;
-    border-left: 3.5px solid transparent;
-    border-right: 3.5px solid transparent;
-    border-top: 4.5px solid rgba(255,255,255,0.55);
-    margin-left: 2px;
-    margin-top: 1px;
-  }
+.iti__country-container {
+  left: 0;
+}
 
-  .ci-phone-input {
-    flex: 1;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 7px;
-    padding: 8px 11px;
-    font-size: 12.5px;
-    font-family: inherit;
-    color: #fff;
-    outline: none;
-  }
+.iti__selected-country {
+  background: rgba(255,255,255,0.06) !important;
+  border-right: 1px solid rgba(255,255,255,0.12);
+  padding: 0 14px;
+  border-radius: 7px 0 0 7px;
+  height: 100%;
+}
 
-  .ci-phone-input::placeholder { color: rgba(200,220,255,0.35); }
-  .ci-phone-input:focus { border-color: rgba(100,180,255,0.5); background: rgba(255,255,255,0.12); }
+.iti__selected-country:hover {
+  background: rgba(255,255,255,0.1) !important;
+}
 
-  /* DROPDOWN */
-  .ci-dropdown {
-    display: none;
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 0;
-    width: 240px;
-    max-height: 210px;
-    overflow-y: auto;
-    background: #0d1f50;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 9px;
-    z-index: 200;
-    padding: 4px 0;
-  }
+.iti__selected-dial-code {
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 500;
+}
 
-  .ci-dropdown.open { display: block; }
+.iti__arrow {
+  border-top-color: rgba(255,255,255,0.7);
+}
 
-  .ci-dropdown-search {
-    width: calc(100% - 14px);
-    margin: 6px 7px;
-    padding: 6px 10px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.16);
-    border-radius: 6px;
-    font-size: 12px;
-    font-family: inherit;
-    color: #fff;
-    outline: none;
-  }
+.iti__country-list {
+  background: #0d1f50;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+  color: #fff;
+  margin-top: 8px;
+  max-height: 240px;
+}
 
-  .ci-dropdown-search::placeholder { color: rgba(255,255,255,0.35); }
+.iti__country {
+  padding: 10px 14px;
+}
 
-  .ci-dropdown-list { list-style: none; }
+.iti__country:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
 
-  .ci-dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 12px;
-    font-size: 12.5px;
-    color: rgba(255,255,255,0.85);
-    cursor: pointer;
-  }
+.iti__highlight {
+  background: rgba(100,180,255,0.15);
+}
 
-  .ci-dropdown-item:hover { background: rgba(255,255,255,0.10); }
-  .ci-dropdown-item.selected { background: rgba(100,180,255,0.15); }
+.iti__country-name,
+.iti__dial-code {
+  color: #fff;
+}
 
-  .ci-dropdown-item .di-flag { font-size: 15px; line-height: 1; }
-  .ci-dropdown-item .di-name { flex: 1; font-size: 12px; color: rgba(255,255,255,0.65); }
-  .ci-dropdown-item .di-code { font-size: 12px; font-weight: 500; }
+/* ===== PHONE INPUT ===== */
 
-  .ci-dropdown::-webkit-scrollbar { width: 4px; }
-  .ci-dropdown::-webkit-scrollbar-track { background: transparent; }
-  .ci-dropdown::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+.ci-phone-input {
+  width: 100%;
+  height: 44px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 7px;
+  padding: 8px 11px;
+  
+  font-size: 13px;
+  font-family: inherit;
+  color: #ffffff !important;
+  outline: none;
+}
+
+.ci-phone-input::placeholder {
+  color: rgba(200,220,255,0.35);
+}
+
+.ci-phone-input:focus {
+  border-color: rgba(100,180,255,0.5);
+  background: rgba(255,255,255,0.12);
+}
+
+
+.iti__search-input {
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  color: #000000 !important;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.iti__search-input::placeholder {
+  color: rgba(0, 0, 0, 0.55) !important;
+}
+
 
   /* SUBMIT */
   .ci-form-btn {
@@ -1992,12 +1989,13 @@ body{font-family:'Sora',sans-serif;background:#fff;overflow-x:hidden;}
   transition:border-color .2s,color .2s;
   cursor:pointer;
   background:transparent;
+  
 }
 .btn-all:hover{border-color:#1a1a1a;color:#1a1a1a;}
 .btn-all:hover .arr-dark{background:#1a1a1a;}
 .arr-dark{
   width:28px;height:28px;border-radius:50%;
-  background:#1f2937;
+  background: linear-gradient(135deg, #13C5B8, #2A44B0);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
   transition:background .2s;
@@ -2064,7 +2062,7 @@ body{font-family:'Sora',sans-serif;background:#fff;overflow-x:hidden;}
 .btn-case:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.7);}
 .arr-white{
   width:26px;height:26px;border-radius:50%;
-  background:rgba(255,255,255,.22);
+  background: linear-gradient(135deg, #13C5B8, #2A44B0);
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;
 }
@@ -2502,7 +2500,7 @@ body{font-family:'Sora',sans-serif;background:#fff;overflow-x:hidden;}
       justify-content: center;
       width: 28px;
       height: 28px;
-      background: rgba(255,255,255,0.15);
+       background: linear-gradient(135deg, #13C5B8, #2A44B0);
       border-radius: 50%;
       flex-shrink: 0;
       transition: background 0.2s;
@@ -3011,13 +3009,16 @@ body{font-family:'Sora',sans-serif;background:#fff;overflow-x:hidden;}
 .cf-section{
   background-color: white;}
 
+  
+
 </style>
 
 
 
 
 
-
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.css"/>
 
 </head>
 <body>
@@ -3063,21 +3064,15 @@ body{font-family:'Sora',sans-serif;background:#fff;overflow-x:hidden;}
           <input type="text" placeholder="Enter Full Name" autocomplete="off"/>
         </div>
 
-        <div class="ci-field">
-          <label>Phone number</label>
-          <div class="ci-phone-row" id="phoneRow">
-            <div class="ci-flag-btn" id="flagBtn">
-              <span class="flag-emoji" id="selFlag">🇮🇳</span>
-              <span class="dial-code" id="selCode">+91</span>
-              <span class="chev"></span>
-            </div>
-            <div class="ci-dropdown" id="countryDropdown">
-              <input class="ci-dropdown-search" id="countrySearch" type="text" placeholder="Search country..."/>
-              <ul class="ci-dropdown-list" id="countryList"></ul>
-            </div>
-            <input class="ci-phone-input" type="tel" placeholder="Phone number"/>
-          </div>
-        </div>
+       <div class="ci-field">
+  <label>Phone number</label>
+
+  <input
+    class="ci-phone-input"
+    type="tel"
+    placeholder="Phone number"
+  />
+</div>
 
         <div class="ci-field">
           <label>Message</label>
@@ -4096,98 +4091,6 @@ body{font-family:'Sora',sans-serif;background:#fff;overflow-x:hidden;}
 
 
 
-<script>
-const countries = [
-  {flag:"🇺🇸",name:"United States",code:"+1"},
-  {flag:"🇬🇧",name:"United Kingdom",code:"+44"},
-  {flag:"🇮🇳",name:"India",code:"+91"},
-  {flag:"🇦🇺",name:"Australia",code:"+61"},
-  {flag:"🇦🇪",name:"UAE",code:"+971"},
-  {flag:"🇸🇬",name:"Singapore",code:"+65"},
-  {flag:"🇩🇪",name:"Germany",code:"+49"},
-  {flag:"🇫🇷",name:"France",code:"+33"},
-  {flag:"🇯🇵",name:"Japan",code:"+81"},
-  {flag:"🇨🇳",name:"China",code:"+86"},
-  {flag:"🇨🇦",name:"Canada",code:"+1"},
-  {flag:"🇧🇷",name:"Brazil",code:"+55"},
-  {flag:"🇲🇽",name:"Mexico",code:"+52"},
-  {flag:"🇮🇹",name:"Italy",code:"+39"},
-  {flag:"🇪🇸",name:"Spain",code:"+34"},
-  {flag:"🇳🇱",name:"Netherlands",code:"+31"},
-  {flag:"🇰🇷",name:"South Korea",code:"+82"},
-  {flag:"🇿🇦",name:"South Africa",code:"+27"},
-  {flag:"🇳🇬",name:"Nigeria",code:"+234"},
-  {flag:"🇸🇦",name:"Saudi Arabia",code:"+966"},
-  {flag:"🇵🇰",name:"Pakistan",code:"+92"},
-  {flag:"🇧🇩",name:"Bangladesh",code:"+880"},
-  {flag:"🇮🇩",name:"Indonesia",code:"+62"},
-  {flag:"🇵🇭",name:"Philippines",code:"+63"},
-  {flag:"🇹🇭",name:"Thailand",code:"+66"},
-  {flag:"🇲🇾",name:"Malaysia",code:"+60"},
-  {flag:"🇻🇳",name:"Vietnam",code:"+84"},
-  {flag:"🇵🇹",name:"Portugal",code:"+351"},
-  {flag:"🇸🇪",name:"Sweden",code:"+46"},
-  {flag:"🇨🇭",name:"Switzerland",code:"+41"},
-  {flag:"🇳🇿",name:"New Zealand",code:"+64"},
-  {flag:"🇦🇷",name:"Argentina",code:"+54"},
-  {flag:"🇨🇴",name:"Colombia",code:"+57"},
-  {flag:"🇪🇬",name:"Egypt",code:"+20"},
-  {flag:"🇰🇪",name:"Kenya",code:"+254"},
-  {flag:"🇬🇭",name:"Ghana",code:"+233"},
-  {flag:"🇹🇷",name:"Turkey",code:"+90"},
-  {flag:"🇺🇦",name:"Ukraine",code:"+380"},
-  {flag:"🇵🇱",name:"Poland",code:"+48"},
-  {flag:"🇷🇺",name:"Russia",code:"+7"},
-];
-
-let selected = countries[2];
-
-const flagBtn = document.getElementById("flagBtn");
-const dropdown = document.getElementById("countryDropdown");
-const list = document.getElementById("countryList");
-const search = document.getElementById("countrySearch");
-const selFlag = document.getElementById("selFlag");
-const selCode = document.getElementById("selCode");
-
-function renderList(arr) {
-  list.innerHTML = arr.map(c => `
-    <li class="ci-dropdown-item ${c===selected?'selected':''}" data-code="${c.code}" data-flag="${c.flag}" data-name="${c.name}">
-      <span class="di-flag">${c.flag}</span>
-      <span class="di-name">${c.name}</span>
-      <span class="di-code">${c.code}</span>
-    </li>`).join("");
-
-  list.querySelectorAll(".ci-dropdown-item").forEach(el => {
-    el.addEventListener("click", () => {
-      selected = countries.find(c => c.name === el.dataset.name);
-      selFlag.textContent = selected.flag;
-      selCode.textContent = selected.code;
-      dropdown.classList.remove("open");
-      search.value = "";
-      renderList(countries);
-    });
-  });
-}
-
-renderList(countries);
-
-flagBtn.addEventListener("click", e => {
-  e.stopPropagation();
-  dropdown.classList.toggle("open");
-  if (dropdown.classList.contains("open")) setTimeout(() => search.focus(), 40);
-});
-
-search.addEventListener("input", () => {
-  const q = search.value.toLowerCase();
-  renderList(countries.filter(c => c.name.toLowerCase().includes(q) || c.code.includes(q)));
-});
-
-document.addEventListener("click", e => {
-  if (!document.getElementById("phoneRow").contains(e.target))
-    dropdown.classList.remove("open");
-});
-</script>
-
 
 <script>
   /* ===== Close all panels except the one passed ===== */
@@ -4418,13 +4321,39 @@ window.onload = function () {
     return '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="'+d+'"/></svg>';
   }
  
-  function slideHTML(s){
-    return '<div class="cs-slide"><img src="'+s.image+'" alt="'+s.cardTag+'"/><div class="cs-overlay"></div><div class="cs-card-body"><p class="cs-card-tag">'+s.cardTag+'</p><p class="cs-card-title">'+s.cardTitle+'</p><a href="#" class="btn-case"><span class="arr-white">'+arrowSVG('right')+'</span>View Case Study</a></div></div>';
-  }
- 
+function slideHTML(s){
+  return '<div class="cs-slide">' +
+    '<img src="'+s.image+'" alt="'+s.cardTag+'"/>' +
+    '<div class="cs-overlay"></div>' +
+    '<div class="cs-card-body">' +
+      '<p class="cs-card-tag">'+s.cardTag+'</p>' +
+      '<p class="cs-card-title">'+s.cardTitle+'</p>' +
+      '<a href="#" class="btn-case">' +
+        '<span class="arr-white">' +
+          '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+            '<line x1="5" y1="12" x2="19" y2="12"/>' +
+            '<polyline points="12 5 19 12 12 19"/>' +
+          '</svg>' +
+        '</span>' +
+        'View Case Study' +
+      '</a>' +
+    '</div>' +
+  '</div>';
+}
   function leftHTML(s){
-    return '<p class="cs-meta">'+s.meta+'</p><h3 class="cs-title">'+s.leftTitle+'<span class="light">'+s.leftLight+'</span></h3><a href="#" class="btn-all"><span class="arr-dark">'+arrowSVG('right')+'</span>View All Cases</a>';
-  }
+  return '<p class="cs-meta">'+s.meta+'</p>' +
+    '<h3 class="cs-title">'+s.leftTitle+
+    '<span class="light">'+s.leftLight+'</span></h3>' +
+    '<a href="#" class="btn-all">' +
+      '<span class="arr-dark">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">' +
+          '<line x1="5" y1="12" x2="19" y2="12"/>' +
+          '<polyline points="12 5 19 12 12 19"/>' +
+        '</svg>' +
+      '</span>' +
+      'View All Cases' +
+    '</a>';
+}
  
   function goTo(next, dir){
     if(busy) return; busy = true;
@@ -4464,6 +4393,24 @@ window.onload = function () {
   window.addEventListener('resize', scaleWM);
 })();
 </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/js/intlTelInput.min.js"></script>
+
+<script>
+  const phoneInput = document.querySelector(".ci-phone-input");
+
+  window.intlTelInput(phoneInput, {
+    initialCountry: "in",
+    separateDialCode: true,
+    preferredCountries: ["in", "us", "gb", "ae"],
+    utilsScript:
+      "https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/js/utils.js"
+  });
+</script>
+
+
+
     <?php include 'footer.php'; ?>
 </body>
 
