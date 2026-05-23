@@ -3273,11 +3273,15 @@ href="https://cdn.jsdelivr.net/npm/intl-tel-input@25.3.0/build/css/intlTelInput.
        <div class="ci-field">
   <label>Phone number</label>
 
-  <input
-    class="ci-phone-input"
-    type="tel"
-    placeholder="Phone number"
-  />
+ <input
+  class="ci-phone-input"
+  type="tel"
+  placeholder="Phone number"
+  inputmode="tel"
+  pattern="^\+?[0-9\s\-()]{7,20}$"
+  maxlength="20"
+  oninput="this.value = this.value.replace(/[^0-9+\-()\s]/g, '')"
+/>
 </div>
 
         <div class="ci-field">
